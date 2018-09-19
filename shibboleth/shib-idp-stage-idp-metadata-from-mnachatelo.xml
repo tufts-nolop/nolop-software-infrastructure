@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:shibmd="urn:mace:shibboleth:metadata:1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" entityID="https://shib-idp-stage.uit.tufts.edu/idp/shibboleth">
+
+    <IDPSSODescriptor protocolSupportEnumeration="urn:mace:shibboleth:1.0 urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:2.0:protocol">
+
+        <Extensions>
+            <shibmd:Scope regexp="false">tufts.edu</shibmd:Scope>
+        </Extensions>
+
+        <KeyDescriptor>
+            <ds:KeyInfo>
+                <ds:X509Data>
+                    <ds:X509Certificate>
+MIID6jCCAtICCQDXD3vNB01NfzANBgkqhkiG9w0BAQUFADCBtjELMAkGA1UEBhMC
+VVMxFjAUBgNVBAgMDU1hc3NhY2h1c2V0dHMxEzARBgNVBAcMClNvbWVydmlsbGUx
+GTAXBgNVBAoMEFR1ZnRzIFVuaXZlcnNpdHkxIjAgBgNVBAsMGVR1ZnRzIFRlY2hu
+b2xvZ3kgU2VydmljZXMxGDAWBgNVBAMMDyoudWl0LnR1ZnRzLmVkdTEhMB8GCSqG
+SIb3DQEJARYSZXJ5YXphMDFAdHVmdHMuZWR1MB4XDTE0MDkwOTE1NTQwOVoXDTI0
+MDkwNjE1NTQwOVowgbYxCzAJBgNVBAYTAlVTMRYwFAYDVQQIDA1NYXNzYWNodXNl
+dHRzMRMwEQYDVQQHDApTb21lcnZpbGxlMRkwFwYDVQQKDBBUdWZ0cyBVbml2ZXJz
+aXR5MSIwIAYDVQQLDBlUdWZ0cyBUZWNobm9sb2d5IFNlcnZpY2VzMRgwFgYDVQQD
+DA8qLnVpdC50dWZ0cy5lZHUxITAfBgkqhkiG9w0BCQEWEmVyeWF6YTAxQHR1ZnRz
+LmVkdTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMpJek2lPxVpqnVx
+ZRjRiel7W1ZnAypvY5y2b0IuUFcq/lygLeyXiBni69wmbLXkqzldTX5Npxh+ai32
+NxKZ0MAHfTcqScywz0dulRuFa5pOlad3RHwztqvnSlR/CpPIX3VkHLMDIcwntVNX
+jWKxKxNUVatkb9NIS5tPzB25VB2AEnuyZDqG57Ojxg8cqg/I6qN+Drr/J6CUp2PP
+M+nHlvxUkxg+zwmbH+qTmGtq0NgxbsfIEQg7Om2gS/FJx2TmfcFW8TXaWCcXFe+S
+07HHXqrECElgVNLQxX6OG/xHN0VsfNlmDBbiqa7P+UT9N6PsO8DuS8OZzZVyUsaW
+9O0ZcSkCAwEAATANBgkqhkiG9w0BAQUFAAOCAQEARUB186jUFuwFLYhacvW71aq5
+jYcfGuoPwFlmPAVKMbkLxjYTvWcn14qz65l757lUCgzMWTSllN1Shzdo8E2xmFmb
+KEFkN2GiHxDpYYvlE7fQ22ZdD9oKksdlasyuk593z0E1loxt2ykkhv/koC/kVNMO
+UhbPGV3BqHf7QkBQHzclSAgBRCvu/Dk/mh/xsUWUGCiuS+0Ri5dL32dODNglZ3a7
+IcK7r/ey1hAgdmGfkTuKEEx9k3xxy/74oZHUW5hBRG7vvCN5wGAEr3NhfGbXSF99
+zFC8M7R0cYwd6LfTtXBwF5WmVMW8qY3COkxN1i/ne9jhFC/5TbcFTq5nXeaR9w==
+                    </ds:X509Certificate>
+                </ds:X509Data>
+            </ds:KeyInfo>
+        </KeyDescriptor>
+
+        <ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:1.0:bindings:SOAP-binding"
+                                   Location="https://shib-idp-stage.uit.tufts.edu:8443/idp/profile/SAML1/SOAP/ArtifactResolution"
+                                   index="1"/>
+
+        <ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP"
+                                   Location="https://shib-idp-stage.uit.tufts.edu:8443/idp/profile/SAML2/SOAP/ArtifactResolution"
+                                   index="2"/>
+
+        <NameIDFormat>urn:mace:shibboleth:1.0:nameIdentifier</NameIDFormat>
+        <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+
+        <SingleSignOnService Binding="urn:mace:shibboleth:1.0:profiles:AuthnRequest" Location="https://shib-idp-stage.uit.tufts.edu/idp/profile/Shibboleth/SSO"/>
+
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://shib-idp-stage.uit.tufts.edu/idp/profile/SAML2/POST/SSO"/>
+
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign" Location="https://shib-idp-stage.uit.tufts.edu/idp/profile/SAML2/POST-SimpleSign/SSO"/>
+
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://shib-idp-stage.uit.tufts.edu/idp/profile/SAML2/Redirect/SSO"/>
+    </IDPSSODescriptor>
+
+    <AttributeAuthorityDescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:2.0:protocol">
+
+        <Extensions>
+            <shibmd:Scope regexp="false">tufts.edu</shibmd:Scope>
+        </Extensions>
+
+        <KeyDescriptor>
+            <ds:KeyInfo>
+                <ds:X509Data>
+                    <ds:X509Certificate>
+MIID6jCCAtICCQDXD3vNB01NfzANBgkqhkiG9w0BAQUFADCBtjELMAkGA1UEBhMC
+VVMxFjAUBgNVBAgMDU1hc3NhY2h1c2V0dHMxEzARBgNVBAcMClNvbWVydmlsbGUx
+GTAXBgNVBAoMEFR1ZnRzIFVuaXZlcnNpdHkxIjAgBgNVBAsMGVR1ZnRzIFRlY2hu
+b2xvZ3kgU2VydmljZXMxGDAWBgNVBAMMDyoudWl0LnR1ZnRzLmVkdTEhMB8GCSqG
+SIb3DQEJARYSZXJ5YXphMDFAdHVmdHMuZWR1MB4XDTE0MDkwOTE1NTQwOVoXDTI0
+MDkwNjE1NTQwOVowgbYxCzAJBgNVBAYTAlVTMRYwFAYDVQQIDA1NYXNzYWNodXNl
+dHRzMRMwEQYDVQQHDApTb21lcnZpbGxlMRkwFwYDVQQKDBBUdWZ0cyBVbml2ZXJz
+aXR5MSIwIAYDVQQLDBlUdWZ0cyBUZWNobm9sb2d5IFNlcnZpY2VzMRgwFgYDVQQD
+DA8qLnVpdC50dWZ0cy5lZHUxITAfBgkqhkiG9w0BCQEWEmVyeWF6YTAxQHR1ZnRz
+LmVkdTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMpJek2lPxVpqnVx
+ZRjRiel7W1ZnAypvY5y2b0IuUFcq/lygLeyXiBni69wmbLXkqzldTX5Npxh+ai32
+NxKZ0MAHfTcqScywz0dulRuFa5pOlad3RHwztqvnSlR/CpPIX3VkHLMDIcwntVNX
+jWKxKxNUVatkb9NIS5tPzB25VB2AEnuyZDqG57Ojxg8cqg/I6qN+Drr/J6CUp2PP
+M+nHlvxUkxg+zwmbH+qTmGtq0NgxbsfIEQg7Om2gS/FJx2TmfcFW8TXaWCcXFe+S
+07HHXqrECElgVNLQxX6OG/xHN0VsfNlmDBbiqa7P+UT9N6PsO8DuS8OZzZVyUsaW
+9O0ZcSkCAwEAATANBgkqhkiG9w0BAQUFAAOCAQEARUB186jUFuwFLYhacvW71aq5
+jYcfGuoPwFlmPAVKMbkLxjYTvWcn14qz65l757lUCgzMWTSllN1Shzdo8E2xmFmb
+KEFkN2GiHxDpYYvlE7fQ22ZdD9oKksdlasyuk593z0E1loxt2ykkhv/koC/kVNMO
+UhbPGV3BqHf7QkBQHzclSAgBRCvu/Dk/mh/xsUWUGCiuS+0Ri5dL32dODNglZ3a7
+IcK7r/ey1hAgdmGfkTuKEEx9k3xxy/74oZHUW5hBRG7vvCN5wGAEr3NhfGbXSF99
+zFC8M7R0cYwd6LfTtXBwF5WmVMW8qY3COkxN1i/ne9jhFC/5TbcFTq5nXeaR9w==
+                    </ds:X509Certificate>
+                </ds:X509Data>
+            </ds:KeyInfo>
+        </KeyDescriptor>
+
+        <AttributeService Binding="urn:oasis:names:tc:SAML:1.0:bindings:SOAP-binding"
+                          Location="https://shib-idp-stage.uit.tufts.edu:8443/idp/profile/SAML1/SOAP/AttributeQuery"/>
+
+        <AttributeService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP"
+                          Location="https://shib-idp-stage.uit.tufts.edu:8443/idp/profile/SAML2/SOAP/AttributeQuery"/>
+
+        <NameIDFormat>urn:mace:shibboleth:1.0:nameIdentifier</NameIDFormat>
+        <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+
+    </AttributeAuthorityDescriptor>
+
+</EntityDescriptor>

@@ -1,0 +1,210 @@
+<SPConfig xmlns="urn:mace:shibboleth:2.0:native:sp:config"
+    xmlns:conf="urn:mace:shibboleth:2.0:native:sp:config"
+    xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+    xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"
+    xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
+    logger="syslog.logger" clockSkew="180">
+
+  <OutOfProcess logger="shibd.logger" />
+  <InProcess logger="native.logger" />
+
+    <!-- Only one listener can be defined, to connect in-process modules to shibd. -->
+    <UnixListener address="shibd.sock"/>
+    <!-- <TCPListener address="127.0.0.1" port="1600" acl="127.0.0.1"/> -->
+
+    <!-- This set of components stores sessions and other persistent data in daemon memory. -->
+    <StorageService type="Memory" id="mem" cleanupInterval="900"/>
+    <SessionCache type="StorageService" StorageService="mem" cacheAssertions="false"
+                  cacheAllowance="900" inprocTimeout="900" cleanupInterval="900"/>
+    <ReplayCache StorageService="mem"/>
+    <ArtifactMap artifactTTL="180"/>
+
+<!--  The RequestMap defines portions of the webspace to protect; ras-dev.uit.tufts.edu/kc-dev here.
+
+<RequestMapper type="Native">
+  <RequestMap applicationId="default">
+     <Host name="ras-dev.uit.tufts.edu/kc-dev"  authType="shibboleth" requireSession="true" />
+  </RequestMap>
+</RequestMapper>
+-->
+
+<RequestMapper type="Native">
+  <RequestMap applicationId="default">
+     <Host name="ras-dev.uit.tufts.edu/kc-dev">
+     <Path name="secure" authType="shibboleth" requireSession="true" />
+     </Host>
+  </RequestMap>
+</RequestMapper>
+
+<!-- The entityID is the name TestShib made for your SP. -->
+<ApplicationDefaults    entityID="https://ras-dev.uit.tufts.edu/kc-dev/shibboleth-sp"
+                        REMOTE_USER="eppn"
+                        metadataAttributePrefix="Meta-"
+                        sessionHook="/kc-dev/Shibboleth.sso/AttrChecker"
+                        signing="false" encryption="false">
+
+   <!-- You should use secure cookies if at all possible.  See cookieProps in this Wiki article. -->
+   <!-- https://wiki.shibboleth.net/confluence/display/SHIB2/NativeSPSessions -->
+        <Sessions lifetime="28800" timeout="3600" checkAddress="false"
+            handlerURL="/kc-dev/Shibboleth.sso" handlerSSL="true" cookieProps="https" relayState="ss:mem"
+            exportLocation="http://localhost/Shibboleth.sso/GetAssertion" exportACL="127.0.0.1"
+            idpHistory="false" idpHistoryDays="7">
+
+<!-- Triggers a login request directly to the TestShib IdP. -->
+<!-- https://wiki.shibboleth.net/confluence/display/SHIB2/NativeSPServiceSSO -->
+<!-- <SSO entityID="https://shib-idp-stage.uit.tufts.edu/idp/shibboleth">
+                SAML2 SAML1
+ </SSO>
+-->
+            <!-- Default directs to a specific IdP (favoring SAML 2 over Shib 1). -->
+            <SessionInitiator type="Chaining" Location="/Login" isDefault="true" id="Login"
+                              entityID="https://shib-idp-stage.uit.tufts.edu/idp/shibboleth">
+
+                <SessionInitiator type="SAML2" template="bindingTemplate.html"/>
+                <SessionInitiator type="Shib1"/>
+                <!--
+                To allow for >1 IdP, remove entityID property from Chaining element and add
+                *either* of the SAMLDS or WAYF handlers below:
+
+                <SessionInitiator type="SAMLDS" URL="https://ds.example.org/DS/WAYF"/>
+                <SessionInitiator type="WAYF" URL="https://wayf.example.org/WAYF"/>
+                -->
+            </SessionInitiator>
+
+            <md:AssertionConsumerService Location="/SAML2/POST" index="1"
+                Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"/>
+            <md:AssertionConsumerService Location="/SAML2/POST-SimpleSign" index="2"
+                Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign"/>
+            <md:AssertionConsumerService Location="/SAML2/Artifact" index="3"
+                Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact"/>
+            <md:AssertionConsumerService Location="/SAML2/ECP" index="4"
+                Binding="urn:oasis:names:tc:SAML:2.0:bindings:PAOS"/>
+            <md:AssertionConsumerService Location="/SAML/POST" index="5"
+                Binding="urn:oasis:names:tc:SAML:1.0:profiles:browser-post"/>
+            <md:AssertionConsumerService Location="/SAML/Artifact" index="6"
+                Binding="urn:oasis:names:tc:SAML:1.0:profiles:artifact-01"/>
+
+<!-- SAML and local-only logout. -->
+<!-- https://wiki.shibboleth.net/confluence/display/SHIB2/NativeSPServiceLogout -->
+<!--<Logout>SAML2 Local</Logout>-->
+
+            <!-- LogoutInitiators enable SP-initiated local or global/single logout of sessions. -->
+            <LogoutInitiator type="Chaining" Location="/Logout">
+                <LogoutInitiator type="SAML2" template="bindingTemplate.html"/>
+                <LogoutInitiator type="Local"/>
+            </LogoutInitiator>
+
+            <!-- md:SingleLogoutService locations handle single logout (SLO) protocol messages. -->
+            <md:SingleLogoutService Location="/SLO/SOAP"
+                Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP"/>
+            <md:SingleLogoutService Location="/SLO/Redirect" conf:template="bindingTemplate.html"
+                Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"/>
+            <md:SingleLogoutService Location="/SLO/POST" conf:template="bindingTemplate.html"
+                Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"/>
+            <md:SingleLogoutService Location="/SLO/Artifact" conf:template="bindingTemplate.html"
+                Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact"/>
+
+            <!-- md:ManageNameIDService locations handle NameID management (NIM) protocol messages. -->
+            <md:ManageNameIDService Location="/NIM/SOAP"
+                Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP"/>
+            <md:ManageNameIDService Location="/NIM/Redirect" conf:template="bindingTemplate.html"
+                Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"/>
+            <md:ManageNameIDService Location="/NIM/POST" conf:template="bindingTemplate.html"
+                Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"/>
+            <md:ManageNameIDService Location="/NIM/Artifact" conf:template="bindingTemplate.html"
+                Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact"/>
+
+            <!--
+            md:ArtifactResolutionService locations resolve artifacts issued when using the
+            SAML 2.0 HTTP-Artifact binding on outgoing messages, generally uses SOAP.
+            -->
+            <md:ArtifactResolutionService Location="/Artifact/SOAP" index="1"
+                Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP"/>
+
+            <!-- Extension service that generates "approximate" metadata based on SP configuration. -->
+            <Handler type="MetadataGenerator" Location="/Metadata" signing="false"/>
+
+            <!-- Status reporting service. -->
+            <Handler type="Status" Location="/Status" acl="127.0.0.1 ::1"/>
+
+            <!-- Session diagnostic service. -->
+            <Handler type="Session" Location="/Session" showAttributeValues="false"/>
+
+            <!-- JSON feed of discovery information. -->
+            <Handler type="DiscoveryFeed" Location="/DiscoFeed"/>
+
+            <!-- Checks for required attribute(s) before login completes. -->
+            <Handler type="AttributeChecker" Location="/AttrChecker" template="attrChecker.html"
+                attributes="eppn" flushSession="true"/>
+        </Sessions>
+
+        <!--
+        Allows overriding of error template information/filenames. You can
+        also add attributes with values that can be plugged into the templates.
+        -->
+        <Errors supportContact="ess@tufts.edu"
+            helpLocation="/kc-dev/about.html"
+            styleSheet="/kc-dev/shibboleth-sp/main.css"/>
+
+        <!--
+        Uncomment and modify to tweak settings for specific IdPs or groups. Settings here
+        generally match those allowed by the <ApplicationDefaults> element.
+        -->
+        <!--
+        <RelyingParty Name="SpecialFederation" keyName="SpecialKey"/>
+        -->
+
+        <!-- Example of remotely supplied batch of signed metadata. -->
+        <!--
+        <MetadataProvider type="XML" uri="http://federation.org/federation-metadata.xml"
+              backingFilePath="federation-metadata.xml" reloadInterval="7200">
+            <MetadataFilter type="RequireValidUntil" maxValidityInterval="2419200"/>
+            <MetadataFilter type="Signature" certificate="fedsigner.pem"/>
+        </MetadataProvider>
+        -->
+
+        <!-- Example of locally maintained metadata. -->
+
+        <MetadataProvider type="XML" file="shib-idp-stage-idp-metadata.xml"/>
+
+
+        <!-- TrustEngines run in order to evaluate peer keys and certificates. -->
+        <TrustEngine type="ExplicitKey"/>
+        <TrustEngine type="PKIX"/>
+
+        <!-- Map to extract attributes from SAML assertions. -->
+        <AttributeExtractor type="XML" validate="true" reloadChanges="false" path="attribute-map.xml"/>
+
+        <!-- Extracts support information for IdP from its metadata. -->
+        <AttributeExtractor type="Metadata" errorURL="errorURL" DisplayName="displayName"/>
+
+        <!-- Use a SAML query if no attributes are supplied during SSO. -->
+        <AttributeResolver type="Query" subjectMatch="true"/>
+
+        <!-- Default filtering policy for recognized attributes, lets other data pass. -->
+        <AttributeFilter type="XML" validate="true" path="attribute-policy.xml"/>
+
+        <!-- Simple file-based resolver for using a single keypair. -->
+        <CredentialResolver type="File" key="sp.key" certificate="sp.crt"/>
+
+        <!--
+        The default settings can be overridden by creating ApplicationOverride elements (see
+        the https://wiki.shibboleth.net/confluence/display/SHIB2/NativeSPApplicationOverride topic).
+        Resource requests are mapped by web server commands, or the RequestMapper, to an
+        applicationId setting.
+
+        Example of a second application (for a second vhost) that has a different entityID.
+        Resources on the vhost would map to an applicationId of "admin":
+        -->
+        <!--
+        <ApplicationOverride id="admin" entityID="https://admin.example.org/shibboleth"/>
+        -->
+<!--    <ApplicationOverride id="ras-sbx" />   -->
+    </ApplicationDefaults>
+
+    <!-- Policies that determine how to process and authenticate runtime messages. -->
+    <SecurityPolicyProvider type="XML" validate="true" path="security-policy.xml"/>
+
+    <!-- Low-level configuration about protocols and bindings available for use. -->
+    <ProtocolProvider type="XML" validate="true" reloadChanges="false" path="protocols.xml"/>
+</SPConfig>
