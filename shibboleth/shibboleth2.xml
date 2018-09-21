@@ -64,9 +64,7 @@
             styleSheet="/shibboleth-sp/main.css"/>
 
         <!-- Example of locally maintained metadata. -->
-        <!--
-        <MetadataProvider type="XML" validate="true" path="partner-metadata.xml"/>
-        -->
+        <MetadataProvider type="XML" validate="true" file="shib-idp-stage-idp-metadata.xml"/>
 
         <!-- Example of remotely supplied batch of signed metadata. -->
         <!--
