@@ -61,3 +61,7 @@ Run `certbot`
 
        Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
        Donating to EFF:                    https://eff.org/donate-le
+
+Relevant to your interests:
+
+    https://github.com/obynio/certbot-plugin-gandi
