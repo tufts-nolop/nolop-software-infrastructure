@@ -9,6 +9,6 @@ Install Certbot and Gandi DNS plugin
 
 Get LiveDNS API key from Gandi.net.
 
-Create a gandi.ini config file with the following contents and `chmod 600 gandi.ini` on it:
+Create `/home/pi/gandi.ini` config file with the following contents and `chmod 600 gandi.ini` on it:
 
     certbot_plugin_gandi:dns_api_key=APIKEY
