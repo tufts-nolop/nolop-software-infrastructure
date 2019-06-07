@@ -1,3 +1,5 @@
+Log in to Raspberry Pi with username `pi` and password `XXXXXX`.
+
 Install Certbot and Gandi DNS plugin
 
     sudo apt-get update
