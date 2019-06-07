@@ -6,3 +6,5 @@ Install Certbot and Gandi DNS plugin
     sudo apt-get install python3-pip
     sudo apt-get install certbot
     pip3 install certbot-plugin-gandi
+
+Get LiveDNS API key from Gandi.net.
