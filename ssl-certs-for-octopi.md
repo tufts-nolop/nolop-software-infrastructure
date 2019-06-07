@@ -65,3 +65,5 @@ Run `certbot`
 Relevant to your interests:
 
     https://github.com/obynio/certbot-plugin-gandi
+
+Still need to figure out how to install certificates, probably into `/etc/ssl/snakeoil.pem`
