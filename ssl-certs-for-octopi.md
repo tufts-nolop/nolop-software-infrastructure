@@ -1,6 +1,8 @@
 Log in to Raspberry Pi with username `pi` and password `XXXXXX`.
 
-Install Certbot and Gandi DNS plugin
+To get a valid SSL certificate, we're going to use Let's Encrypt's Certbot client with its DNS challenge because it can be done automatically with at least some registrars, including ours, Gandi.net. We want to use the DNS challenge because the alternative, the HTTP challenge, requires that your Pi be reachable on the open internet, which would be difficult to do with the Tufts wireless network, and in general, we want our Pi protected by the Tufts firewall.
+
+Install Certbot and Gandi DNS plugin.
 
     wget https://bootstrap.pypa.io/get-pip.py
     sudo python3 ./get-pip.py
@@ -9,33 +11,15 @@ Install Certbot and Gandi DNS plugin
 
 Get LiveDNS API key from Gandi.net.
 
-Create `/home/pi/gandi.ini` config file with the following contents and `chmod 600 gandi.ini` on it:
+Create `/etc/letsencrypt/gandi.ini` config file with the following contents and `chmod 600 gandi.ini` on it:
 
-        certbot_plugin_gandi:dns_api_key=APIKEY
+        certbot_plugin_gandi:dns_api_key=THE_API_KEY_GOES_HERE_BUT_IT_IS_SECRET
 
-Run `certbot`
+Run `sudo certbot certonly -a certbot-plugin-gandi:dns --certbot-plugin-gandi:dns-credentials /etc/letsencrypt/gandi.ini -d p1.nolop.org`
 
-    sudo certbot certonly -a certbot-plugin-gandi:dns --certbot-plugin-gandi:dns-credentials gandi.ini -d p1.nolop.org
     Saving debug log to /var/log/letsencrypt/letsencrypt.log
     Plugins selected: Authenticator certbot-plugin-gandi:dns, Installer None
-    Enter email address (used for urgent renewal and security notices) (Enter 'c' to
-    cancel): XXXXXXX@pingswept.org
-
-    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    Please read the Terms of Service at
-    https://letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf. You must
-    agree in order to register with the ACME server at
-    https://acme-v02.api.letsencrypt.org/directory
-    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    (A)gree/(C)ancel: A
-
-    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    Would you be willing to share your email address with the Electronic Frontier
-    Foundation, a founding partner of the Let's Encrypt project and the non-profit
-    organization that develops Certbot? We'd like to send you email about our work
-    encrypting the web, EFF news, campaigns, and ways to support digital freedom.
-    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    (Y)es/(N)o: n
+    <snip>
     Obtaining a new certificate
     Performing the following challenges:
     dns-01 challenge for p1.nolop.org
@@ -57,13 +41,28 @@ Run `certbot`
        secure backup of this folder now. This configuration directory will
        also contain certificates and private keys obtained by Certbot so
        making regular backups of this folder is ideal.
-     - If you like Certbot, please consider supporting our work by:
 
-       Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
-       Donating to EFF:                    https://eff.org/donate-le
+Install certificates into `/etc/ssl/snakeoil.pem` in the format that Haproxy requires (one file, `fullchain.pem` followed directly by `privkey.pem`). The name `snakeoil.pem` is just because that's the filename that Haproxy is configured to look for in the default Octopi image.
+
+    sudo cat /etc/letsencrypt/live/p1.nolop.org/fullchain.pem /etc/letsencrypt/live/p1.nolop.org/privkey.pem > /etc/ssl/snakeoil.pem
+    sudo systemctl restart haproxy
+
+Just for reference, `snakeoil.pem` should look like this:
+
+    root@octopi:/etc/ssl# ls -l snakeoil.pem
+    -rw-r--r-- 1 root root 5254 Jun 10 14:33 snakeoil.pem
+
+For certificate renewal, we want a file called something like 'install-cert-for-haproxy.sh' in `/etc/letsencrypt/renewal-hooks/post/` that contains:
+
+    #!/bin/sh
+    sudo cat /etc/letsencrypt/live/p1.nolop.org/fullchain.pem /etc/letsencrypt/live/p1.nolop.org/privkey.pem > /etc/ssl/snakeoil.pem
+    sudo systemctl restart haproxy
+
+Also, `sudo chmod 750 /etc/letsencrypt/renewal-hooks/post/install-cert-for-haproxy.sh` so that script has permissions like this:
+
+    -rwxr-x--- 1 root root 170 Jun 10 15:56 install-cert-for-haproxy.sh
 
 Relevant to your interests:
 
     https://github.com/obynio/certbot-plugin-gandi
-
-Still need to figure out how to install certificates, probably into `/etc/ssl/snakeoil.pem`
+    https://serversforhackers.com/c/letsencrypt-with-haproxy
