@@ -62,6 +62,8 @@ Also, `sudo chmod 750 /etc/letsencrypt/renewal-hooks/post/install-cert-for-hapro
 
     -rwxr-x--- 1 root root 170 Jun 10 15:56 install-cert-for-haproxy.sh
 
+You can test renewal with `sudo certbot renew --dry-run`
+
 Relevant to your interests:
 
     https://github.com/obynio/certbot-plugin-gandi
