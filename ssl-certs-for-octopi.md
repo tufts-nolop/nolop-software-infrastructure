@@ -52,13 +52,13 @@ Just for reference, `snakeoil.pem` should look like this:
     root@octopi:/etc/ssl# ls -l snakeoil.pem
     -rw-r--r-- 1 root root 5254 Jun 10 14:33 snakeoil.pem
 
-For certificate renewal, we want a file called something like 'install-cert-for-haproxy.sh' in `/etc/letsencrypt/renewal-hooks/post/` that contains:
+For certificate renewal, we want a file called something like `install-cert-for-haproxy.sh` in `/etc/letsencrypt/renewal-hooks/post/` that contains:
 
     #!/bin/sh
     sudo cat /etc/letsencrypt/live/p1.nolop.org/fullchain.pem /etc/letsencrypt/live/p1.nolop.org/privkey.pem > /etc/ssl/snakeoil.pem
     sudo systemctl restart haproxy
 
-Also, `sudo chmod 750 /etc/letsencrypt/renewal-hooks/post/install-cert-for-haproxy.sh` so that script has permissions like this:
+Also, `sudo chmod 750 /etc/letsencrypt/renewal-hooks/post/install-cert-for-haproxy.sh` so that the script has permissions like this:
 
     -rwxr-x--- 1 root root 170 Jun 10 15:56 install-cert-for-haproxy.sh
 
