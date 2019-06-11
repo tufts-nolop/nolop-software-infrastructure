@@ -14,7 +14,9 @@ Get LiveDNS API key from Gandi.net.
 
 Create `/etc/letsencrypt/gandi.ini` config file with the following contents and `chmod 600 gandi.ini` on it:
 
-        certbot_plugin_gandi:dns_api_key=THE_API_KEY_GOES_HERE_BUT_IT_IS_SECRET
+    certbot_plugin_gandi:dns_api_key=THE_API_KEY_GOES_HERE_BUT_IT_IS_SECRET
+
+If `/etc/letsencrypt/` does not exist, run the `certbot` command below. It will fail, but it will create the directory with a bunch of config files inside the first time it runs.
 
 Run `sudo certbot certonly -a certbot-plugin-gandi:dns --certbot-plugin-gandi:dns-credentials /etc/letsencrypt/gandi.ini -d p1.nolop.org`
 
@@ -43,7 +45,7 @@ Run `sudo certbot certonly -a certbot-plugin-gandi:dns --certbot-plugin-gandi:dn
        also contain certificates and private keys obtained by Certbot so
        making regular backups of this folder is ideal.
 
-Install certificates into `/etc/ssl/snakeoil.pem` in the format that Haproxy requires (one file, `fullchain.pem` followed directly by `privkey.pem`). The name `snakeoil.pem` is just because that's the filename that Haproxy is configured to look for in the default Octopi image.
+Install certificates into `/etc/ssl/snakeoil.pem` in the format that Haproxy requires (one file, `fullchain.pem` followed directly by `privkey.pem`). The odd name `snakeoil.pem` is used just because that's the filename that Haproxy is configured to look for in the default Octopi image.
 
     sudo cat /etc/letsencrypt/live/p1.nolop.org/fullchain.pem /etc/letsencrypt/live/p1.nolop.org/privkey.pem > /etc/ssl/snakeoil.pem
     sudo systemctl restart haproxy
