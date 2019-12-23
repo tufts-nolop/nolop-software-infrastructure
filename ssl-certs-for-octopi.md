@@ -54,6 +54,8 @@ Install certificates into `/etc/ssl/snakeoil.pem` in the format that Haproxy req
     sudo cat /etc/letsencrypt/live/p1.nolop.org/fullchain.pem /etc/letsencrypt/live/p1.nolop.org/privkey.pem > /etc/ssl/snakeoil.pem
     sudo systemctl restart haproxy
 
+(The copying of the keys above will probably fail with `permission denied` because the `>` redirect isn't executed as the superuser. This might also be why automatic renewal is broken, but maybe not.)
+
 Just for reference, `snakeoil.pem` should look like this:
 
     root@octopi:/etc/ssl# ls -l snakeoil.pem
