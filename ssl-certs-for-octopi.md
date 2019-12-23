@@ -1,3 +1,7 @@
+### Update: to renew certs, just SSH in and run: `sudo certbot renew` ###
+
+(Auto-renewing isn't working, but it's not clear why, and maybe not worth the effort to fix.)
+
 Log in to Raspberry Pi with username `pi` and password `XXXXXX`.
 
 To get a valid SSL certificate, we're going to use Let's Encrypt's Certbot client with its DNS challenge because it can be done automatically with at least some registrars, including ours, Gandi.net. We want to use the DNS challenge because the alternative, the HTTP challenge, requires that your Pi be reachable on the open internet, which would be difficult to do with the Tufts wireless network, and in general, we want our Pi protected by the Tufts firewall.
