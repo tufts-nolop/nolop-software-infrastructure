@@ -37,6 +37,8 @@ Set up SSL cert.
 
 Find the IP address; something like 10.12.14.223. Tell Brandon to set `pX.nolop.org` to point to the IP.
 
+Install a slicer profile for Cura. Maybe some default settings for Octoprint too?
+
 ## Maintenance ##
 
 Renew SSL certificate using `sudo certbot renew`
