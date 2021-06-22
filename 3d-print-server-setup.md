@@ -4,13 +4,14 @@ Raspberry Pi 3B+
 
 ## Software ##
 
-Download Octopi 0.18.0 from https://octoprint.org/download/
+Download Octopi 0.18.0 from https://octoprint.org/download/ (This is Octoprint 1.6.1, plus a bundle of plugins, all set up for the Pi.)
 
-Install plugins
+Install third-party plugins
 
-1. Firmware updater
-2. Octoprint Slicer
-3. Cura legacy?
+1. Firmware updater 1.11.0
+2. Octoprint Slicer 2.0.0
+3. CuraEngine legacy 1.1.2
+4. BetterHeaterTimeout 1.3.0
 
 Install `avrdude` for firmware updates to Prusa MK3S printers
 
