@@ -13,7 +13,12 @@ Install third-party plugins
 3. CuraEngine legacy 1.1.2
 4. BetterHeaterTimeout 1.3.0
 
-Install `avrdude` for firmware updates to Prusa MK3S printers
+`/home/pi/oprint/bin/pip install https://github.com/OctoPrint/OctoPrint-FirmwareUpdater/archive/refs/tags/1.11.0.zip`
+`/home/pi/oprint/bin/pip install https://github.com/kennethjiang/OctoPrint-Slicer/archive/refs/tags/2.0.0.zip`
+`/home/pi/oprint/bin/pip install https://github.com/OctoPrint/OctoPrint-CuraEngineLegacy/archive/refs/tags/1.1.2.zip`
+`/home/pi/oprint/bin/pip install https://github.com/tjjfvi/OctoPrint-BetterHeaterTimeout/releases/tag/v1.3.0`
+
+Install `avrdude`, needed by firmware updater plugin
 
 `sudo apt install avrdude`
 
