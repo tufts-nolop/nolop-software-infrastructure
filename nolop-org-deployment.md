@@ -6,7 +6,7 @@ As root, install web server, DB, and connection between them
 
     apt update
     apt upgrade
-    apt install nginx mariadb-server php-fpm php-mysql
+    apt install nginx mariadb-server php-fpm php-mysql php-gd php-imagick php-dom php-mbstring php-curl php-zip
 
 Then
 
