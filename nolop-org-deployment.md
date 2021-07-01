@@ -70,20 +70,11 @@ Comment out the SSL section at the end of `nginx.conf` and run
 
     certbot --nginx
 
-It appears from `systemctl list-timers` that the Certbot renewal service is installed automatically. Test with `certbot renew --dry-run`
+Add to server block in `nginx-wordpress.conf`:
 
-Raise upload limits
+    client_max_body_size 200M;
 
-Add to both server blocks in `nginx-wordpress.conf`:
-
-    client_max_body_size 100M;
-
-Also fix `/etc/php/7.2/fpm/php.ini` by changing:
-
-    upload_max_filesize = 64M
-    post_max_size = 64M
-
-Restart Nginx and PHP.
+Restart Nginx.
 
 Log in to Wordpress and copy over Wordpress backups.
 
