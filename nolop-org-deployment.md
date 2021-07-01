@@ -42,13 +42,13 @@ Create database for Wordpress.
     MariaDB [(none)]> FLUSH PRIVILEGES;
     Query OK, 0 rows affected (0.00 sec)
 
-    MariaDB [(none)]> exit;
+    MariaDB [(none)]> EXIT;
     Bye
 
 Configure PHP-FPM and PHP-MySQL
 
     systemctl restart nginx
-    systemctl restart php7.2-fpm
+    systemctl restart php7.4-fpm
 
 Create file `nginx-wordpress.conf` in `/etc/nginx/sites-available` containing
 https://raw.githubusercontent.com/tufts-nolop/nolop-software-infrastructure/master/nginx-wordpress.conf
