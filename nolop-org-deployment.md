@@ -11,8 +11,13 @@ As root, install web server, DB, and connection between them
 Then
 
     cd /var/www
-    wget http://wordpress.org/latest.tar.gz
+    wget https://wordpress.org/latest.tar.gz
+    md5sum latest.tar.gz
+
+Check MD5 against https://wordpress.org/download/releases/
+
     tar xzvf latest.tar.gz
+    rm -rf html
     mv wordpress html
     rm latest.tar.gz
     cd html
