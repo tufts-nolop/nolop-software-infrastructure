@@ -62,17 +62,13 @@ https://raw.githubusercontent.com/tufts-nolop/nolop-software-infrastructure/mast
 
 Set up SSL certificates
 
-    apt install software-properties-common
-    add-apt-repository universe
-    add-apt-repository ppa:certbot/certbot
-    apt update
-    apt install certbot python-certbot-nginx
+    snap install core
+    snap refresh core
+    snap install --classic certbot
 
-Comment out the SSL cert lines at the end of `nginx.conf` and run
+Comment out the SSL section at the end of `nginx.conf` and run
 
-    certbot certonly --nginx
-
-Re-enable the SSL cert lines. (Might be easier some other way.)
+    certbot --nginx
 
 It appears from `systemctl list-timers` that the Certbot renewal service is installed automatically. Test with `certbot renew --dry-run`
 
