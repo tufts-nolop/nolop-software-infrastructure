@@ -77,3 +77,21 @@ Relevant to your interests:
 
     https://github.com/obynio/certbot-plugin-gandi
     https://serversforhackers.com/c/letsencrypt-with-haproxy
+
+### Changing hostnames ###
+
+    certbot revoke --cert-name p1.nolop.org
+    certbot certonly -d p26.nolop.org
+    
+Make sure that the hostname in `/etc/letsencrypt/renewal-hooks/install-cert-for-haproxy.sh` is correct.
+
+### Other useful SSL debugging techniques ###
+
+Verify a certificate's contents
+
+    openssl x509 -in fullchain.pem -text -noout
+
+Check locally what certificate the server is sending out, avoiding any browser caches or whatever
+
+    curl -kv --resolve p1.nolop.org:443:127.0.0.1 https://p1.nolop.org
+
