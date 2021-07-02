@@ -81,7 +81,7 @@ Relevant to your interests:
 ### Changing hostnames ###
 
     certbot revoke --cert-name p1.nolop.org
-    certbot certonly -d p26.nolop.org
+    certbot certonly -d p26.nolop.org # path to DNS info is /etc/letsencrypt/gandi.ini
     
 Make sure that the hostname in `/etc/letsencrypt/renewal-hooks/post/install-cert-for-haproxy.sh` is updated with the correct hostname.
 
