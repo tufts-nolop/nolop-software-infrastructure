@@ -11,6 +11,7 @@ The bracket mounts to the Prusa with two M3 bolts.
 * McMaster 91292A009, M2.5 x 0.45 mm stainless SHCS, length 5 mm
 * McMaster 91292A014, M2.5 x 0.45 mm stainless SHCS, length 10 mm
 * McMaster 95947A005, M2.5 x 0.45 mm aluminum threaded standoff, length 10 mm
+* McMaster 91292A113, M3 x 0.5 mm stainless SHCS, length 10 mm
 
 ## Software ##
 
