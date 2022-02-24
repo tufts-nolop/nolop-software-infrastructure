@@ -1,6 +1,16 @@
 ## Hardware ##
 
-Raspberry Pi 3B+
+Until 2022, we used the Raspberry Pi 3B+. In February of 2022, we're switching to the Raspberry Pi 4B for P9-P12.
+
+The Pi is mounted to the Prusa with a custom aluminum bracket that Brandon machined. The Pi attaches with a total of 8 M2.5 bolts, 4 of length 5 mm through the Pi into 4 hex standoffs and 4 of length 10 mm through the bracket into the same standoffs.
+
+The bracket mounts to the Prusa with two M3 bolts.
+
+**Relevant parts**
+
+* McMaster 91292A009, M2.5 x 0.45 mm stainless SHCS, length 5 mm
+* McMaster 91292A014, M2.5 x 0.45 mm stainless SHCS, length 10 mm
+* McMaster 95947A005, M2.5 x 0.45 mm aluminum threaded standoff, length 10 mm
 
 ## Software ##
 
