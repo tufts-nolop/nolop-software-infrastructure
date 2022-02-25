@@ -21,7 +21,7 @@ Installs for P9-P12 will use OctoPi (stable) 0.18.0 with Octoprint 1.7.3, instal
 
 Use the imager to install OctoPi, enable SSH, and set the password for user `pi`.
 
-Copy `wpa_supplicant.conf` to `/etc/wpa_supplicant/wpa_supplicant.conf`
+Copy `octopi-wpa-supplicant.txt` to `/boot/octopi-wpa-supplicant.txt`
 
 Install third-party plugins
 
