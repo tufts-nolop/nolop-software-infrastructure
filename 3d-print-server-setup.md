@@ -46,6 +46,19 @@ Enable plugin blacklist processing.
 
 Accept the default printer profile because we'll change that later.
 
+`mv ~/.octoprint/printerProfiles/_default.profile ~/.octoprint/printerProfiles/nolop_prusa_mk3_1.profile`
+
+Copy over the contents of the profile from https://github.com/tufts-nolop/nolop-software-infrastructure/blob/master/printerProfiles/nolop_prusa_mk3_1.profile
+
+Set up users like this:
+
+```
+source ~/oprint/bin/activate
+octoprint user password admin
+octoprint user password nolop
+service octoprint restart
+```
+
 Install third-party plugins
 
 1. Firmware updater 1.11.0
