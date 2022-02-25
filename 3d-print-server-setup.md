@@ -19,6 +19,10 @@ Download Octopi 0.18.0 from https://octoprint.org/download/ (This is Octoprint 1
 
 Installs for P9-P12 will use OctoPi (stable) 0.18.0 with Octoprint 1.7.3, installed directly through the Raspberry Pi imager.
 
+Use the imager to install OctoPi, enable SSH, and set the password for user `pi`.
+
+Copy `wpa_supplicant.conf` to `/etc/wpa_supplicant/wpa_supplicant.conf`
+
 Install third-party plugins
 
 1. Firmware updater 1.11.0
@@ -43,8 +47,6 @@ Settings for firmware update:
 * wiring
 
 Copy over `user.yaml` to `/home/pi/.octoprint/user.yaml`
-
-Copy `wpa_supplicant.conf` to `/etc/wpa_supplicant/wpa_supplicant.conf`
 
 Set up SSL cert.
 
