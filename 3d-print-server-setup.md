@@ -1,6 +1,6 @@
 ## Hardware ##
 
-As of February 2022, all the printers are connected to Raspberry Pi 3B+ servers running Raspberry Pi OS.
+As of February 2022, all the printers are connected to Raspberry Pi 3B+ servers running OctoPi.
 
 The Pi is mounted to the Prusa with a custom aluminum bracket that Brandon machined. The Pi attaches with a total of 8 M2.5 bolts, 4 of length 5 mm through the Pi into 4 hex standoffs and 4 of length 10 mm through the bracket into the same standoffs.
 
@@ -16,6 +16,8 @@ The bracket mounts to the Prusa with two M3 bolts.
 ## Software ##
 
 Download Octopi 0.18.0 from https://octoprint.org/download/ (This is Octoprint 1.6.1, plus a bundle of plugins, all set up for the Pi.)
+
+Installs for P9-P12 will use OctoPi (stable) 0.18.0 with Octoprint 1.7.3, installed directly through the Raspberry Pi imager.
 
 Install third-party plugins
 
