@@ -66,10 +66,12 @@ Install third-party plugins
 3. CuraEngine legacy 1.1.2
 4. BetterHeaterTimeout 1.3.0
 
-`/home/pi/oprint/bin/pip install https://github.com/OctoPrint/OctoPrint-FirmwareUpdater/archive/refs/tags/1.11.0.zip`
-`/home/pi/oprint/bin/pip install https://github.com/kennethjiang/OctoPrint-Slicer/archive/refs/tags/2.0.0.zip`
-`/home/pi/oprint/bin/pip install https://github.com/OctoPrint/OctoPrint-CuraEngineLegacy/archive/refs/tags/1.1.2.zip`
-`/home/pi/oprint/bin/pip install https://github.com/tjjfvi/OctoPrint-BetterHeaterTimeout/releases/tag/v1.3.0`
+* `/home/pi/oprint/bin/pip install https://github.com/OctoPrint/OctoPrint-FirmwareUpdater/archive/refs/tags/1.11.0.zip`
+* `/home/pi/oprint/bin/pip install https://github.com/kennethjiang/OctoPrint-Slicer/archive/refs/tags/2.0.0.zip`
+* `/home/pi/oprint/bin/pip install https://github.com/OctoPrint/OctoPrint-CuraEngineLegacy/archive/refs/tags/1.1.2.zip`
+* `/home/pi/oprint/bin/pip install https://github.com/tjjfvi/OctoPrint-BetterHeaterTimeout/releases/tag/v1.3.0`
+
+(The BetterHeaterTimeout plugin failed to install from the command line, so installed through web interface instead.)
 
 Install `avrdude`, needed by firmware updater plugin
 
@@ -81,8 +83,6 @@ Settings for firmware update:
 * ATMEGA 2450
 * /usr/bin/avrdude
 * wiring
-
-Copy over `user.yaml` to `/home/pi/.octoprint/user.yaml`
 
 Set up SSL cert.
 
