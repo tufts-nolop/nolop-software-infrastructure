@@ -105,6 +105,8 @@ cd build
 sudo cp ./CuraEngine /usr/local/bin/cura_engine
 ```
 
+Set path in CuraEngineLegacy plugin settings to `/usr/local/bin/cura_engine`
+
 ## Maintenance ##
 
 Renew SSL certificate using `sudo certbot renew`
