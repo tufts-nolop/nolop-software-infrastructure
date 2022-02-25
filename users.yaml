@@ -1,32 +1,22 @@
-NolopOcto2:
-    active: true
-    apikey: null
-    groups:
-    - users
-    password: 47bc873754fb0d25ae4957bcaf27d3a3db887dbd8cc39c96a006a9e058d20b0ba5a9d952abb385aa49c08bbb92228ee87c42f27ae89c521de967f68549848a1c
-    permissions: []
-    roles:
-    - user
-    settings: {}
-NolopOcto2_Admin:
-    active: true
-    apikey: null
-    groups:
-    - admins
-    - users
-    password: 758541cae1400e65e58d59c46a472505a6e80c6678b8d857d2b637dede4492031fd56c195cb1b3c468ef41345778b92fc9db69fe6a05f3c17935c978c5f3d2d2
-    permissions: []
-    roles:
-    - user
-    - admin
-    settings: {}
+admin:
+  active: true
+  apikey: null
+  groups:
+  - admins
+  - users
+  password: 600ea65572f32ad44e4dab4cdf0b63c06766e2aa2e1842c6ea83e3225277f2d81dd3f750874191bb48e49fad7c008b5d22dee40e4765296846a857533d57bbe8
+  permissions: []
+  roles:
+  - user
+  - admin
+  settings: {}
 nolop:
-    active: true
-    apikey: null
-    groups:
-    - users
-    password: d9eb218f6d30fe4a1ef8d839d46cd8baa472278e68d2f51a1c380251aa9ef540274709d234157e18e119a7e7940efca5c37d2742e964d5a34e154ff3cc0b79bf
-    permissions: []
-    roles:
-    - user
-    settings: {}
+  active: true
+  apikey: CD2BD600F2384FC29DAE90045755479B
+  groups:
+  - users
+  password: a5a3519e9c42ee2c6b4137fc4b6f26a4afb0a05e606f079d9a719e97fde92f3494ad59d87ca1e181ac900ebda6dcbf32055bf584141b60ecbfa6c162838fbc6e
+  permissions: []
+  roles:
+  - user
+  settings: {}
