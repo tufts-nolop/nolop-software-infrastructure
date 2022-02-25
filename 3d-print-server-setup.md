@@ -101,6 +101,8 @@ Build Cura Legacy
 git clone -b legacy https://github.com/Ultimaker/CuraEngine.git
 cd CuraEngine
 make
+cd build
+sudo cp ./CuraEngine /usr/local/bin/cura_engine
 ```
 
 ## Maintenance ##
