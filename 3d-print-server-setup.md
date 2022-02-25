@@ -86,6 +86,15 @@ Settings for firmware update:
 
 Set up SSL cert.
 
+### Cura Slicer setup
+
+Copy two slicer profiles over.
+
+https://raw.githubusercontent.com/tufts-nolop/nolop-software-infrastructure/master/slicingProfiles/curalegacy/nolop_prusa_pla.profile to `~/.octoprint/slicingProfiles/curalegacy/nolop_prusa_pla.profile`
+
+https://raw.githubusercontent.com/tufts-nolop/nolop-software-infrastructure/master/slicingProfiles/curalegacy/nolop_prusa_tpu.profile to `~/.octoprint/slicingProfiles/curalegacy/nolop_prusa_tpu.profile`
+
+
 Install a slicer profile for Cura. Maybe some default settings for Octoprint too?
 
 ## Maintenance ##
