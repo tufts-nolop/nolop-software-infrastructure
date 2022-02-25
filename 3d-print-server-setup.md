@@ -1,6 +1,6 @@
 ## Hardware ##
 
-Until 2022, we used the Raspberry Pi 3B+. In February of 2022, we're switching to the Raspberry Pi 4B for P9-P12.
+As of February 2022, all the printers are connected to Raspberry Pi 3B+ servers running Raspberry Pi OS.
 
 The Pi is mounted to the Prusa with a custom aluminum bracket that Brandon machined. The Pi attaches with a total of 8 M2.5 bolts, 4 of length 5 mm through the Pi into 4 hex standoffs and 4 of length 10 mm through the bracket into the same standoffs.
 
