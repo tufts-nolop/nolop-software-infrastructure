@@ -23,6 +23,29 @@ Use the imager to install OctoPi, enable SSH, and set the password for user `pi`
 
 Copy `octopi-wpa-supplicant.txt` to `/boot/octopi-wpa-supplicant.txt`
 
+Connect via a console cable to the UART at speed 115200.
+
+### Fix WPA2 Enterprise support ###
+
+Edit `/lib/dhcpcd/dhcpcd-hooks/10-wpa_supplicant` so that the line that contains `nl80211,wext` instead contains `wext,nl80211`. (This is fixed in newer releases of Raspberry Pi OS, but the version that OctoPi is based on is still using Debian 10.6 "Buster", from September 2020. The older printers are running on Debian 9.4 "Stretch", from 2018, before this bug was introduced.)
+
+### Octoprint configuration
+
+Tell Brandon the IP address of the printer and get him to set up pX.nolop.org to point to that IP.
+
+Open pX.nolop.org in a browser and go through the Octoprint setup wizard.
+
+username: `admin`
+password: THAT SECRET PASSWORD WE DON'T PUBLISH ON THE INTERNET
+
+Enable connectivity check, I guess?
+
+Enable anonymous usage tracking.
+
+Enable plugin blacklist processing.
+
+Accept the default printer profile because we'll change that later.
+
 Install third-party plugins
 
 1. Firmware updater 1.11.0
