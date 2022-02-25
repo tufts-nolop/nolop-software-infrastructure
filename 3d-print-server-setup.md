@@ -95,7 +95,13 @@ https://raw.githubusercontent.com/tufts-nolop/nolop-software-infrastructure/mast
 https://raw.githubusercontent.com/tufts-nolop/nolop-software-infrastructure/master/slicingProfiles/curalegacy/nolop_prusa_tpu.profile to `~/.octoprint/slicingProfiles/curalegacy/nolop_prusa_tpu.profile`
 
 
-Install a slicer profile for Cura. Maybe some default settings for Octoprint too?
+Build Cura Legacy
+
+```
+git clone -b legacy https://github.com/Ultimaker/CuraEngine.git
+cd CuraEngine
+make
+```
 
 ## Maintenance ##
 
