@@ -54,10 +54,11 @@ Set up users like this:
 
 ```
 source ~/oprint/bin/activate
-octoprint user password admin
-octoprint user password nolop
+octoprint user add nolop
 service octoprint restart
 ```
+
+Edit `~/.octoprint/users.yaml` so that the user `nolop` has the correct API key so our Nolop printer dashboard will work.
 
 Install third-party plugins
 
