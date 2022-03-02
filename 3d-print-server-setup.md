@@ -89,12 +89,7 @@ Set up SSL cert.
 
 ### Cura Slicer setup
 
-Copy two slicer profiles over.
-
-https://raw.githubusercontent.com/tufts-nolop/nolop-software-infrastructure/master/slicingProfiles/curalegacy/nolop_prusa_pla.profile to `~/.octoprint/slicingProfiles/curalegacy/nolop_prusa_pla.profile`
-
-https://raw.githubusercontent.com/tufts-nolop/nolop-software-infrastructure/master/slicingProfiles/curalegacy/nolop_prusa_tpu.profile to `~/.octoprint/slicingProfiles/curalegacy/nolop_prusa_tpu.profile`
-
+Run the CuraEngine Legacy plugin setup. Enter `/usr/local/bin/cura_engine` as the path to the executable.
 
 Build Cura Legacy
 
@@ -106,7 +101,12 @@ cd build
 sudo cp ./CuraEngine /usr/local/bin/cura_engine
 ```
 
-Set path in CuraEngineLegacy plugin settings to `/usr/local/bin/cura_engine`
+Copy two slicer profiles into `~/.octoprint/slicingProfiles/curalegacy` 
+
+```
+wget https://raw.githubusercontent.com/tufts-nolop/nolop-software-infrastructure/master/slicingProfiles/curalegacy/nolop_prusa_pla.profile
+wget https://raw.githubusercontent.com/tufts-nolop/nolop-software-infrastructure/master/slicingProfiles/curalegacy/nolop_prusa_tpu.profile
+```
 
 ## Maintenance ##
 
