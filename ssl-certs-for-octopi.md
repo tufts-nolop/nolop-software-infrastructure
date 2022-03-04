@@ -25,7 +25,9 @@ Create `/etc/letsencrypt/gandi.ini` config file with the following contents and 
 
 If `/etc/letsencrypt/` does not exist, run the `certbot` command below. It will fail, but it will create the directory with a bunch of config files inside the first time it runs.
 
-Run `sudo certbot certonly -a certbot-plugin-gandi:dns --certbot-plugin-gandi:dns-credentials /etc/letsencrypt/gandi.ini -d p1.nolop.org`
+`sudo /home/pi/oprint/bin/certbot certonly -a certbot-plugin-gandi:dns --certbot-plugin-gandi:dns-credentials /etc/letsencrypt/gandi.ini -d p9.nolop.org`
+
+ OBSOLETE: Run `sudo certbot certonly -a certbot-plugin-gandi:dns --certbot-plugin-gandi:dns-credentials /etc/letsencrypt/gandi.ini -d p1.nolop.org`
 
     Saving debug log to /var/log/letsencrypt/letsencrypt.log
     Plugins selected: Authenticator certbot-plugin-gandi:dns, Installer None
