@@ -27,6 +27,13 @@ If `/etc/letsencrypt/` does not exist, run the `certbot` command below. It will 
 
 `sudo /home/pi/oprint/bin/certbot certonly -a certbot-plugin-gandi:dns --certbot-plugin-gandi:dns-credentials /etc/letsencrypt/gandi.ini -d p9.nolop.org`
 
+NOTE:
+
+```
+Plugin legacy name certbot-plugin-gandi:dns may be removed in a future version. Please use dns instead.
+Certbot is moving to remove 3rd party plugins prefixes. Please use --authenticator dns-gandi --dns-gandi-credentials
+```
+
  OBSOLETE: Run `sudo certbot certonly -a certbot-plugin-gandi:dns --certbot-plugin-gandi:dns-credentials /etc/letsencrypt/gandi.ini -d p1.nolop.org`
 
     Saving debug log to /var/log/letsencrypt/letsencrypt.log
