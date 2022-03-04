@@ -8,6 +8,7 @@ To get a valid SSL certificate, we're going to use Let's Encrypt's Certbot clien
 
 Install Certbot and Gandi DNS plugin.
 
+    THIS IS PROBABLY OBSOLETE.
     # sudo apt-get install python3-dev
     # wget https://bootstrap.pypa.io/get-pip.py
     # sudo python3 ./get-pip.py
