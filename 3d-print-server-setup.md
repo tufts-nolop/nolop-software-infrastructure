@@ -66,15 +66,13 @@ Install third-party plugins
 2. Octoprint Slicer 2.0.0
 3. CuraEngine legacy 1.1.2
 4. BetterHeaterTimeout 1.3.0
-
-## NEED TO ADD ipOnConnect
+5. OctoPrint ipOnConnect 0.2.4
 
 * `/home/pi/oprint/bin/pip install https://github.com/OctoPrint/OctoPrint-FirmwareUpdater/archive/refs/tags/1.11.0.zip`
 * `/home/pi/oprint/bin/pip install https://github.com/kennethjiang/OctoPrint-Slicer/archive/refs/tags/2.0.0.zip`
 * `/home/pi/oprint/bin/pip install https://github.com/OctoPrint/OctoPrint-CuraEngineLegacy/archive/refs/tags/1.1.2.zip`
-* `/home/pi/oprint/bin/pip install https://github.com/tjjfvi/OctoPrint-BetterHeaterTimeout/releases/tag/v1.3.0`
-
-(The BetterHeaterTimeout plugin failed to install from the command line, so installed through web interface instead.)
+* `/home/pi/oprint/bin/pip install https://github.com/tjjfvi/OctoPrint-BetterHeaterTimeout/archive/refs/tags/v1.3.0.zip
+* `/home/pi/oprint/bin/pip install https://github.com/jneilliii/OctoPrint-ipOnConnect/archive/refs/tags/0.2.4.zip
 
 Install `avrdude`, needed by firmware updater plugin
 
