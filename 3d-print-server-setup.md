@@ -46,9 +46,14 @@ Enable plugin blacklist processing.
 
 Accept the default printer profile because we'll change that later.
 
-`mv ~/.octoprint/printerProfiles/_default.profile ~/.octoprint/printerProfiles/nolop_prusa_mk3_1.profile`
 
-Copy over the contents of the profile from https://github.com/tufts-nolop/nolop-software-infrastructure/blob/master/printerProfiles/nolop_prusa_mk3_1.profile
+Copy over the contents of the profile from https://github.com/tufts-nolop/nolop-software-infrastructure/blob/master/printerProfiles/nolop_prusa_mk3_1.profile as below.
+
+```
+rm ~/.octoprint/printerProfiles/_default.profile
+cd ~/.octoprint/printerProfiles
+wget https://raw.githubusercontent.com/tufts-nolop/nolop-software-infrastructure/master/printerProfiles/nolop_prusa_mk3_1.profile
+```
 
 Set up users like this:
 
