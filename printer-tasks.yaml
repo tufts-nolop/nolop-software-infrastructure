@@ -2,8 +2,15 @@
 - hosts: printers
   remote_user: pi
   tasks:
-    - name: Broadcast hostname and IP via UDP periodically
+    - name: Add periodic task to broadcast hostname and IP via UDP periodically
       ansible.builtin.cron:
         name: "broadcast-ip"
         minute: "*/5"
         job: "/home/pi/broadcast-ip.sh"
+    - name: Add broadcast script
+      ansible.builtin.copy:
+        src: ./broadcast-ip.sh
+        dest: /home/pi/broadcast-ip.sh
+        owner: pi
+        group: pi
+        mode: '0744'
