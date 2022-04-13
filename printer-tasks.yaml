@@ -1,5 +1,6 @@
 ---
 - hosts: printers
+  remote_user: pi
   tasks:
     - name: Broadcast hostname and IP via UDP periodically
       ansible.builtin.cron:
