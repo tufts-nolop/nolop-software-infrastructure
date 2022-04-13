@@ -1,5 +1,7 @@
 ---
-name: Broadcast hostname and IP via UDP periodically
+hosts: printers
+tasks:
+  name: Broadcast hostname and IP via UDP periodically
   ansible.builtin.cron:
     name: "broadcast-ip"
     minute: "*/5"
