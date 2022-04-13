@@ -6,4 +6,4 @@
       ansible.builtin.cron:
         name: "broadcast-ip"
         minute: "*/5"
-        job: "echo $HOSTNAME has the IP $(hostname -I) as of $(date +\%c) > /dev/udp/66.228.35.229/8000"
+        job: "/home/pi/broadcast-ip.sh"
