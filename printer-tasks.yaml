@@ -1,0 +1,6 @@
+---
+name: Broadcast hostname and IP via UDP periodically
+  ansible.builtin.cron:
+    name: "broadcast-ip"
+    minute: "/5"
+    job: "this is the command"
