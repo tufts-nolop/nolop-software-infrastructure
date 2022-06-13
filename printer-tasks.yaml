@@ -2,8 +2,8 @@
 - hosts: printers
   remote_user: pi
   tasks:
-    - name: Check Octoprint version
-      shell: /home/pi/oprint/bin/octoprint plugins softwareupdate:check
+    - name: Check Octoprint and plugins version
+      shell: /home/pi/oprint/bin/octoprint plugins softwareupdate:check && cat /etc/octopi_version
       register: command_output
     - debug:
         var: command_output.stdout_lines
