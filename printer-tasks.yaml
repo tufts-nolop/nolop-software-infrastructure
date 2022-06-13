@@ -2,6 +2,11 @@
 - hosts: printers
   remote_user: pi
   tasks:
+    - name: Check Octoprint version
+      shell: /home/pi/oprint/bin/octoprint plugins softwareupdate:check
+      register: command_output
+    - debug:
+        var: command_output.stdout_lines
     - name: Add periodic task to broadcast hostname and IP via UDP periodically
       ansible.builtin.cron:
         name: "broadcast-ip"
