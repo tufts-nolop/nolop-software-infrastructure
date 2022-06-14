@@ -185,6 +185,9 @@ Check locally what certificate the server is sending out, avoiding any browser c
 ## Maintenance ##
 
 Renew SSL certificate using `sudo certbot renew`
+On Octoprint 0.18.0 and newer, `certbot` is installed as part of Octoprint, so use `sudo /home/pi/oprint/bin/certbot renew`
 
 (Auto-renewing isn't working, but it's not clear why, and maybe not worth the effort to fix.)
+
+(The newer certbot also complains about the Gandi DNS plugin being depreceated. Hmmm.)
 
