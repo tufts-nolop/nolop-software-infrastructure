@@ -2,6 +2,11 @@
 - hosts: printers
   remote_user: pi
   tasks:
+    - name: Install avrdude
+      become: yes
+      apt:
+        name: avrdude
+        state: present
     - name: Check Octoprint and plugins version
       shell: /home/pi/oprint/bin/octoprint plugins softwareupdate:check && cat /etc/octopi_version
       register: command_output
