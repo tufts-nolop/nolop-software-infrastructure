@@ -15,7 +15,7 @@ sudo apt install ansible
 
 ```
 cd nolop-software-infrastructure
-ansible-playbook -i ansible-inventory.ini printer-tasks.yaml
+ansible-playbook -i ansible-inventory.ini -K printer-tasks.yaml
 ```
 
 Also useful
