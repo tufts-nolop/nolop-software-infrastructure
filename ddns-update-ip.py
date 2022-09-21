@@ -17,8 +17,8 @@ SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 class GandiDdnsError(Exception):
     pass
 
-def get_ip():
-    return socket.gethostbyname(socket.gethostname() + '.nolop.org')
+def get_ip(hostname):
+    return socket.gethostbyname(hostname)
 
 def read_config(config_path):
     # Read configuration file
@@ -61,12 +61,15 @@ def main():
         # Set headers
         headers = {'Content-Type': 'application/json', 'Authorization': 'Apikey %s' % apikey}
 
+        a_name = socket.gethostname()
+        domain = config.get(section, 'domain')
+
         # Set URL
         url = '%sdomains/%s/records/%s/A' % (config.get(section, 'gandi_api'),
-                                             config.get(section, 'domain'), config.get(section, 'a_name'))
+                                             domain, a_name)
         print(url)
         # Discover External IP
-        external_ip = get_ip()
+        external_ip = get_ip(a_name + '.' + domain)
         print(('External IP is: %s' % external_ip))
 
         # Prepare record
