@@ -1,0 +1,12 @@
+[local]
+# gandi.net API (Production) key
+apikey = XXXXXXXXXXXXXXXXXXXXXXXXX
+
+# domain
+domain = nolop.org
+
+# TTL (seconds)
+ttl = 300
+
+# Production API
+gandi_api = https://api.gandi.net/v5/livedns/
