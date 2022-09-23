@@ -1,6 +1,6 @@
 [local]
 # gandi.net API (Production) key
-apikey = XXXXXXXXXXXXXXXXXXXXXXXXX
+apikey = {{ ddns_api_key }}
 
 # domain
 domain = nolop.org
