@@ -50,3 +50,4 @@
       ansible.builtin.lineinfile:
         path: /home/pi/ddns-config.txt
         line: "apikey = {{ ddns_api_key }}"
+        insertafter: "# gandi.net API key"
