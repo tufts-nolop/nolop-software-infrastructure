@@ -1,6 +1,9 @@
 ---
 - hosts: printers
   remote_user: pi
+  vars_prompt:
+    - name: ddns_api_key
+      prompt: Enter the DNS API key
   tasks:
     - name: Install avrdude
       become: yes
@@ -43,3 +46,7 @@
         owner: pi
         group: pi
         mode: '0644'
+    - name: Ensure DNS API key is present in dynmaic DNS config file
+      ansible.builtin.lineinfile:
+        path: /home/pi/ddns-config.txt
+        line: "apikey = {{ ddns_api_key }}"
