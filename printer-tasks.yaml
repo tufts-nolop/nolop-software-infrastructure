@@ -12,7 +12,7 @@
       register: command_output
     - debug:
         var: command_output.stdout_lines
-    - name: Add periodic task to broadcast hostname and IP via UDP periodically
+    - name: Add periodic task to broadcast hostname and IP via UDP
       ansible.builtin.cron:
         name: "broadcast-ip"
         minute: "*/5"
@@ -24,3 +24,22 @@
         owner: pi
         group: pi
         mode: '0744'
+    - name: Add periodic task to update DNS record dynamically if IP changes
+      ansible.builtin.cron:
+        name: "ddns-update-ip"
+        minute: "*/5"
+        job: "python3 /home/pi/ddns-update-ip.py"
+    - name: Add dynamic DNS script
+      ansible.builtin.copy:
+        src: ./ddns-update-ip.py
+        dest: /home/pi/ddns-update-ip.py
+        owner: pi
+        group: pi
+        mode: '0744'
+    - name: Add dynamic DNS config file
+      ansible.builtin.copy:
+        src: ./ddns-config.txt
+        dest: /home/pi/ddns-config.txt
+        owner: pi
+        group: pi
+        mode: '0644'
