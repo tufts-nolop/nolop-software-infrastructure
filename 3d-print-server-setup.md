@@ -198,6 +198,13 @@ In `/lib/systemd/system`, make `certbot.timer` and `certbot.service`.
 
 Check that the path to `certbot` is right, because some of the printers have `certbot` installed in weird places.
 
+Then start and enable the timer.
+
+    systemctl start certbot.timer
+    systemctl enable certbot.timer
+
+Verify that the timer is running using `systemctl list-timers --all`
+
 From https://community.letsencrypt.org/t/cerbot-cron-job/23895/5
 
 ### Changing hostnames ###
