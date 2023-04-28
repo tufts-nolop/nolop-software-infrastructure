@@ -165,6 +165,41 @@ Relevant to your interests:
     https://github.com/obynio/certbot-plugin-gandi
     https://serversforhackers.com/c/letsencrypt-with-haproxy
 
+### Auto-renewal ###
+
+In `/lib/systemd/system`, make `certbot.timer` and `certbot.service`.
+
+    -rw-r--r-- 1 root root  233 Apr 28 23:02 certbot.service
+    -rw-r--r-- 1 root root  155 Apr 28 23:02 certbot.timer
+
+`certbot.timer`:
+
+    [Unit]
+    Description=Run certbot twice daily
+    
+    [Timer]
+    OnCalendar=*-*-* 00,12:00:00
+    RandomizedDelaySec=3600
+    Persistent=true
+    
+    [Install]
+    WantedBy=timers.target
+
+`certbot.service`:
+
+    [Unit]
+    Description=Certbot
+    Documentation=file:///usr/share/doc/python-certbot-doc/html/index.html
+    Documentation=https://letsencrypt.readthedocs.io/en/latest/
+    [Service]
+    Type=oneshot
+    ExecStart=/usr/local/bin/certbot -q renew
+    PrivateTmp=true
+
+Check that the path to `certbot` is right, because some of the printers have `certbot` installed in weird places.
+
+From https://community.letsencrypt.org/t/cerbot-cron-job/23895/5
+
 ### Changing hostnames ###
 
     certbot revoke --cert-name p1.nolop.org
