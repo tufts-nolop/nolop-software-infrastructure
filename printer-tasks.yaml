@@ -46,8 +46,31 @@
         owner: pi
         group: pi
         mode: '0644'
-    - name: Ensure DNS API key is present in dynmaic DNS config file
+    - name: Ensure DNS API key is present in dynamic DNS config file
       ansible.builtin.lineinfile:
         path: /home/pi/ddns-config.txt
         line: "apikey = {{ ddns_api_key }}"
         insertafter: "# gandi.net API key"
+    - name: Add Let's Encrypt Certbot service file
+      become: yes
+      ansible.builtin.copy:
+        src: ./certbot.service
+        dest: /lib/systemd/system/certbot.service
+        owner: root
+        group: root
+        mode: '0644'
+    - name: Add Let's Encrypt Certbot timer file
+      become: yes
+      ansible.builtin.copy:
+        src: ./certbot.timer
+        dest: /lib/systemd/system/certbot.timer
+        owner: root
+        group: root
+        mode: '0644'
+    - name: Enable service certbot and ensure it is not masked
+      become: yes
+      ansible.builtin.systemd:
+        name: certbot
+        enabled: true
+        masked: no
+        state: started
