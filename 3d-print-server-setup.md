@@ -39,7 +39,7 @@ service octoprint restart
 
 Edit `~/.octoprint/users.yaml` so that the user `nolop` has the correct API key so our Nolop printer dashboard will work. Also change the admin account so that it is actually an admin.
 
-Add some lines to ~/.octoprint/config.yaml`
+Add some lines to the `server` section of `~/.octoprint/config.yaml`
 
 ```
   firstRun: false
