@@ -5,6 +5,56 @@
     - name: ddns_api_key
       prompt: Enter the DNS API key
   tasks:
+    - name: Open YAML config file
+      slurp:
+        path: /home/pi/.octoprint/config.yaml
+      register: r_config
+    - name: Read config file to dictionary
+      set_fact:
+        config_dict: "{{ r_config['content'] | b64decode | from_yaml }}"
+    - name: Patch dictionary
+      set_fact:
+        config_dict: "{{ config_dict | combine(newdata, recursive=True) }}"
+      vars:
+        newdata:
+          appearance:
+            color: blue
+            name: "{{ ansible_host }}"
+          plugins:
+            curalegacy:
+              cura_engine: /usr/local/bin/cura_engine
+            tracking:
+              enabled: true
+          serial:
+            autoconnect: true
+            baudrate: 115200
+            port: /dev/ttyACM0
+          server:
+            firstRun: false
+            onlineCheck:
+              enabled: true
+            pluginBlacklist:
+              enabled: true
+    - name: Write dict to new YAML file
+      copy:
+        content: "{{ config_dict | to_nice_yaml }}"
+        dest: /home/pi/.octoprint/config.yaml
+
+    - name: Add slicing profile for PLA
+      ansible.builtin.copy:
+        src: ./slicingProfiles/curalegacy/nolop_prusa_pla.profile
+        dest: /home/pi/.octoprint/slicingProfiles/curalegacy/nolop_prusa_pla.profile
+        owner: pi
+        group: pi
+        mode: '0744'
+    - name: Add slicing profile for TPU
+      ansible.builtin.copy:
+        src: ./slicingProfiles/curalegacy/nolop_prusa_tpu.profile
+        dest: /home/pi/.octoprint/slicingProfiles/curalegacy/nolop_prusa_tpu.profile
+        owner: pi
+        group: pi
+        mode: '0744'
+
     - name: Install avrdude
       become: yes
       apt:
@@ -39,18 +89,18 @@
         owner: pi
         group: pi
         mode: '0744'
-    - name: Add dynamic DNS config file
-      ansible.builtin.copy:
-        src: ./ddns-config.txt
-        dest: /home/pi/ddns-config.txt
-        owner: pi
-        group: pi
-        mode: '0644'
-    - name: Ensure DNS API key is present in dynamic DNS config file
-      ansible.builtin.lineinfile:
-        path: /home/pi/ddns-config.txt
-        line: "apikey = {{ ddns_api_key }}"
-        insertafter: "# gandi.net API key"
+#    - name: Add dynamic DNS config file
+#      ansible.builtin.copy:
+#        src: ./ddns-config.txt
+#        dest: /home/pi/ddns-config.txt
+#        owner: pi
+#        group: pi
+#        mode: '0644'
+#    - name: Ensure DNS API key is present in dynamic DNS config file
+#      ansible.builtin.lineinfile:
+#        path: /home/pi/ddns-config.txt
+#        line: "apikey = {{ ddns_api_key }}"
+#        insertafter: "# gandi.net API key"
     - name: Add Let's Encrypt Certbot service file
       become: yes
       ansible.builtin.copy:
