@@ -39,6 +39,16 @@ service octoprint restart
 
 Edit `~/.octoprint/users.yaml` so that the user `nolop` has the correct API key so our Nolop printer dashboard will work. Also change the admin account so that it is actually an admin.
 
+Add some lines to ~/.octoprint/config.yaml`
+
+```
+  firstRun: false
+  onlineCheck:
+    enabled: true
+  pluginBlacklist:
+    enabled: true
+```
+
 Tell Brandon the IP address of the printer and get him to set up pX.nolop.org to point to that IP.
 
 Open pX.nolop.org in a browser and go through the Octoprint setup wizard.
