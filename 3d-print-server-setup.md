@@ -29,6 +29,10 @@ Add the line `enable_uart=1` at the bottom of `/config.txt` on the boot partitio
 
 ### Octoprint configuration
 
+To be able to run Ansible, copy your host key to all the printers.
+
+`ssh-copy-id pi@p1.nolop.org`
+
 Set up users like this:
 
 ```
