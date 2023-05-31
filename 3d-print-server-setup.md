@@ -98,6 +98,11 @@ Install third-party plugins
 * `/home/pi/oprint/bin/pip install https://github.com/tjjfvi/OctoPrint-BetterHeaterTimeout/archive/refs/tags/v1.3.0.zip`
 * `/home/pi/oprint/bin/pip install https://github.com/jneilliii/OctoPrint-ipOnConnect/archive/refs/tags/0.2.4.zip`
 
+```
+Installing plugin "CuraEngine Legacy" from https://github.com/OctoPrint/OctoPrint-CuraLegacy/archive/master.zip...
+/home/pi/oprint/bin/python -m pip --disable-pip-version-check install file:///tmp/tmpie4pn9b5/OctoPrint-CuraEngineLegacy-master.zip --no-cache-dir
+```
+
 Install `avrdude`, needed by firmware updater plugin
 
 `sudo apt install avrdude`
