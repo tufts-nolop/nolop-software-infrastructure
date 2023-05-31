@@ -1,6 +1,6 @@
 ## Hardware ##
 
-As of February 2022, all the printers are connected to Raspberry Pi 3B+ servers running OctoPi.
+From at least February 2022 through May 2023, all the printers are connected to Raspberry Pi 3B+ servers running OctoPi.
 
 The Pi is mounted to the Prusa with a custom aluminum bracket that Brandon machined. The Pi attaches with a total of 8 M2.5 bolts, 4 of length 5 mm through the Pi into 4 hex standoffs and 4 of length 10 mm through the bracket into the same standoffs.
 
@@ -15,19 +15,21 @@ The bracket mounts to the Prusa with two M3 bolts.
 
 ## Software ##
 
-Download Octopi 0.18.0 from https://octoprint.org/download/ (This is Octoprint 1.6.1, plus a bundle of plugins, all set up for the Pi.)
+Download Octopi from https://octoprint.org/download/
 
 Installs for P9-P12 will use OctoPi (stable) 0.18.0 with Octoprint 1.7.3, installed directly through the Raspberry Pi imager.
 
-Use the imager to install OctoPi, enable SSH, and set the password for user `pi`.
+In the imager, pick OctoPi for installation: `Choose OS > Other specific-purpose OS > 3D printing > OctoPi (stable)`
+
+In the imager, click the gear icon to set the hostname to pX, enable SSH, and set the password for user `pi`.
 
 Copy `octopi-wpa-supplicant.txt` to `/boot/octopi-wpa-supplicant.txt`
 
+Edit `/boot/octopi-wpa-supplicant.txt` so that it has the correct wifi password (which we can't store on the internet) from the Nolop whiteboard.
+
+Add the line `enable_uart=1` at the bottom of `/boot/config.txt`
+
 Connect via a console cable to the UART at speed 115200.
-
-### Fix WPA2 Enterprise support ###
-
-Edit `/lib/dhcpcd/dhcpcd-hooks/10-wpa_supplicant` so that the line that contains `nl80211,wext` instead contains `wext,nl80211`. (This is fixed in newer releases of Raspberry Pi OS, but the version that OctoPi is based on is still using Debian 10.6 "Buster", from September 2020. The older printers are running on Debian 9.4 "Stretch", from 2018, before this bug was introduced.)
 
 ### Octoprint configuration
 
