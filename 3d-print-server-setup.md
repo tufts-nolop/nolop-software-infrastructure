@@ -21,13 +21,11 @@ In the imager, pick OctoPi for installation: `Choose OS > Other specific-purpose
 
 In the imager, click the gear icon to set the hostname to pX, enable SSH, and set the password for user `pi`.
 
-Copy `octopi-wpa-supplicant.txt` to `/boot/octopi-wpa-supplicant.txt`
+Copy `octopi-wpa-supplicant.txt` to `/boot/octopi-wpa-supplicant.txt` on the boot partition.
 
 Edit `/boot/octopi-wpa-supplicant.txt` so that it has the correct wifi password (which we can't store on the internet) from the Nolop whiteboard.
 
-Add the line `enable_uart=1` at the bottom of `/boot/config.txt`
-
-Connect via a console cable to the UART at speed 115200.
+Add the line `enable_uart=1` at the bottom of `/config.txt` on the boot partition.
 
 ### Octoprint configuration
 
