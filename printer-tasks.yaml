@@ -5,6 +5,13 @@
     - name: ddns_api_key
       prompt: Enter the DNS API key
   tasks:
+    - name: Add users
+      ansible.builtin.copy:
+        src: ./users.yaml
+        dest: /home/pi/.octoprint/users.yaml
+        owner: pi
+        group: pi
+        mode: '0600'
     - name: Install avrdude
       become: yes
       apt:
