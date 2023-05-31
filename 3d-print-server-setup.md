@@ -29,6 +29,16 @@ Add the line `enable_uart=1` at the bottom of `/config.txt` on the boot partitio
 
 ### Octoprint configuration
 
+Set up users like this:
+
+```
+source ~/oprint/bin/activate
+octoprint user add nolop
+service octoprint restart
+```
+
+Edit `~/.octoprint/users.yaml` so that the user `nolop` has the correct API key so our Nolop printer dashboard will work. Also change the admin account so that it is actually an admin.
+
 Tell Brandon the IP address of the printer and get him to set up pX.nolop.org to point to that IP.
 
 Open pX.nolop.org in a browser and go through the Octoprint setup wizard.
@@ -52,16 +62,6 @@ rm ~/.octoprint/printerProfiles/_default.profile
 cd ~/.octoprint/printerProfiles
 wget https://raw.githubusercontent.com/tufts-nolop/nolop-software-infrastructure/master/printerProfiles/nolop_prusa_mk3_1.profile
 ```
-
-Set up users like this:
-
-```
-source ~/oprint/bin/activate
-octoprint user add nolop
-service octoprint restart
-```
-
-Edit `~/.octoprint/users.yaml` so that the user `nolop` has the correct API key so our Nolop printer dashboard will work.
 
 Install third-party plugins
 
