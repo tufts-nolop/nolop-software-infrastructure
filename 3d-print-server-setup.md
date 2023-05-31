@@ -15,9 +15,7 @@ The bracket mounts to the Prusa with two M3 bolts.
 
 ## Software ##
 
-Download Octopi from https://octoprint.org/download/
-
-Installs for P9-P12 will use OctoPi (stable) 0.18.0 with Octoprint 1.7.3, installed directly through the Raspberry Pi imager.
+Install the Raspberry Pi Imager.
 
 In the imager, pick OctoPi for installation: `Choose OS > Other specific-purpose OS > 3D printing > OctoPi (stable)`
 
