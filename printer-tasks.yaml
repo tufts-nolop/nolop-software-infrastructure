@@ -1,5 +1,5 @@
 ---
-- hosts: printers
+- hosts: p1
   remote_user: pi
   vars_prompt:
     - name: ddns_api_key
@@ -55,11 +55,27 @@
         group: pi
         mode: '0744'
 
+# install rust with rustup, then
+# sudo ln -s /home/pi/.cargo/bin/rustc /usr/local/bin/rustc
+# sudo ln -s /home/pi/.cargo/bin/cargo /usr/local/bin/cargo
+
     - name: Install avrdude
       become: yes
       apt:
         name: avrdude
         state: present
+
+    - name: Install plugins
+      ansible.builtin.pip:
+        executable: /home/pi/oprint/bin/pip
+        name:
+          - https://github.com/OctoPrint/OctoPrint-CuraEngineLegacy/archive/refs/tags/1.1.2.zip
+          - https://github.com/jneilliii/OctoPrint-ipOnConnect/archive/refs/tags/0.2.4.zip
+          - https://github.com/tjjfvi/OctoPrint-BetterHeaterTimeout/archive/refs/tags/v1.3.0.zip
+          - https://github.com/kennethjiang/OctoPrint-Slicer/archive/refs/tags/2.0.0.zip
+          - https://github.com/OctoPrint/OctoPrint-FirmwareUpdater/archive/refs/tags/1.14.0.zip
+          - certbot-plugin-gandi
+
     - name: Check Octoprint and plugins version
       shell: /home/pi/oprint/bin/octoprint plugins softwareupdate:check && cat /etc/octopi_version
       register: command_output
@@ -101,6 +117,7 @@
 #        path: /home/pi/ddns-config.txt
 #        line: "apikey = {{ ddns_api_key }}"
 #        insertafter: "# gandi.net API key"
+
     - name: Add Let's Encrypt Certbot service file
       become: yes
       ansible.builtin.copy:
@@ -124,3 +141,19 @@
         enabled: true
         masked: no
         state: started
+    - name: Add SSL cert post-renewal script for Haproxy
+      become: yes
+      ansible.builtin.copy:
+        src: ./install-ssl-cert-for-haproxy.sh # BUG: need to add a hostname variable to this file
+        dest: /etc/letsencrypt/renewal-hooks/post/install-ssl-cert-for-haproxy.sh
+        owner: root
+        group: root
+        mode: '0750'
+    - name: Add Let's Encrypt DNS credentials for renewal
+      become: yes
+      ansible.builtin.copy:
+        src: ./gandi.ini # BUG: need to add DNS API key variable to this file-- already have the key from up top
+        dest: /etc/letsencrypt/gandi.ini
+        owner: root
+        group: root
+        mode: '0600'

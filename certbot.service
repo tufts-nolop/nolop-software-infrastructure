@@ -2,5 +2,5 @@
 Description=Certbot
 [Service]
 Type=oneshot
-ExecStart=/usr/local/bin/certbot -q renew
+ExecStart=/home/pi/oprint/bin/certbot -q renew
 PrivateTmp=true
