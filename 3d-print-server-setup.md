@@ -43,38 +43,9 @@ service octoprint restart
 
 Edit `~/.octoprint/users.yaml` so that the user `nolop` has the correct API key so our Nolop printer dashboard will work. Also change the admin account so that it is actually an admin.
 
-
-Add some lines to the `plugins: tracking:` section of `~/.octoprint/config.yaml`
-
-```
-  enabled: true
-```
-
-Add some lines to the `server` section of `~/.octoprint/config.yaml`
-
-```
-  firstRun: false
-  onlineCheck:
-    enabled: true
-  pluginBlacklist:
-    enabled: true
-```
-
 Tell Brandon the IP address of the printer and get him to set up pX.nolop.org to point to that IP.
 
-Open pX.nolop.org in a browser and go through the Octoprint setup wizard.
-
-username: `admin`
-password: THAT SECRET PASSWORD WE DON'T PUBLISH ON THE INTERNET
-
-Enable connectivity check, I guess?
-
-Enable anonymous usage tracking.
-
-Enable plugin blacklist processing.
-
 Accept the default printer profile because we'll change that later.
-
 
 Copy over the contents of the profile from https://github.com/tufts-nolop/nolop-software-infrastructure/blob/master/printerProfiles/nolop_prusa_mk3_1.profile as below.
 
@@ -84,28 +55,10 @@ cd ~/.octoprint/printerProfiles
 wget https://raw.githubusercontent.com/tufts-nolop/nolop-software-infrastructure/master/printerProfiles/nolop_prusa_mk3_1.profile
 ```
 
-Install third-party plugins
-
-1. Firmware updater 1.11.0
-2. Octoprint Slicer 2.0.0
-3. CuraEngine legacy 1.1.2
-4. BetterHeaterTimeout 1.3.0
-5. OctoPrint ipOnConnect 0.2.4
-
-* `/home/pi/oprint/bin/pip install https://github.com/OctoPrint/OctoPrint-FirmwareUpdater/archive/refs/tags/1.11.0.zip`
-* `/home/pi/oprint/bin/pip install https://github.com/kennethjiang/OctoPrint-Slicer/archive/refs/tags/2.0.0.zip`
-* `/home/pi/oprint/bin/pip install https://github.com/OctoPrint/OctoPrint-CuraEngineLegacy/archive/refs/tags/1.1.2.zip`
-* `/home/pi/oprint/bin/pip install https://github.com/tjjfvi/OctoPrint-BetterHeaterTimeout/archive/refs/tags/v1.3.0.zip`
-* `/home/pi/oprint/bin/pip install https://github.com/jneilliii/OctoPrint-ipOnConnect/archive/refs/tags/0.2.4.zip`
-
 ```
 Installing plugin "CuraEngine Legacy" from https://github.com/OctoPrint/OctoPrint-CuraLegacy/archive/master.zip...
 /home/pi/oprint/bin/python -m pip --disable-pip-version-check install file:///tmp/tmpie4pn9b5/OctoPrint-CuraEngineLegacy-master.zip --no-cache-dir
 ```
-
-Install `avrdude`, needed by firmware updater plugin
-
-`sudo apt install avrdude`
 
 Settings for firmware update:
 
@@ -130,12 +83,6 @@ cd build
 sudo cp ./CuraEngine /usr/local/bin/cura_engine
 ```
 
-Copy two slicer profiles into `~/.octoprint/slicingProfiles/curalegacy` 
-
-```
-wget https://raw.githubusercontent.com/tufts-nolop/nolop-software-infrastructure/master/slicingProfiles/curalegacy/nolop_prusa_pla.profile
-wget https://raw.githubusercontent.com/tufts-nolop/nolop-software-infrastructure/master/slicingProfiles/curalegacy/nolop_prusa_tpu.profile
-```
 ## Set up SSL ##
 
 To get a valid SSL certificate, we're going to use Let's Encrypt's Certbot client with its DNS challenge because it can be done automatically with at least some registrars, including ours, Gandi.net. We want to use the DNS challenge because the alternative, the HTTP challenge, requires that your Pi be reachable on the open internet, which would be difficult to do with the Tufts wireless network, and in general, we want our Pi protected by the Tufts firewall.
