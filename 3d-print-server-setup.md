@@ -55,23 +55,14 @@ cd ~/.octoprint/printerProfiles
 wget https://raw.githubusercontent.com/tufts-nolop/nolop-software-infrastructure/master/printerProfiles/nolop_prusa_mk3_1.profile
 ```
 
-```
-Installing plugin "CuraEngine Legacy" from https://github.com/OctoPrint/OctoPrint-CuraLegacy/archive/master.zip...
-/home/pi/oprint/bin/python -m pip --disable-pip-version-check install file:///tmp/tmpie4pn9b5/OctoPrint-CuraEngineLegacy-master.zip --no-cache-dir
-```
-
-Settings for firmware update:
+Settings for firmware update plugin:
 
 * Atmel 8-bit processor
 * ATMEGA 2450
 * /usr/bin/avrdude
 * wiring
 
-Set up SSL cert.
-
 ### Cura Slicer setup
-
-Run the CuraEngine Legacy plugin setup. Enter `/usr/local/bin/cura_engine` as the path to the executable.
 
 Build Cura Legacy
 
@@ -86,8 +77,6 @@ sudo cp ./CuraEngine /usr/local/bin/cura_engine
 ## Set up SSL ##
 
 To get a valid SSL certificate, we're going to use Let's Encrypt's Certbot client with its DNS challenge because it can be done automatically with at least some registrars, including ours, Gandi.net. We want to use the DNS challenge because the alternative, the HTTP challenge, requires that your Pi be reachable on the open internet, which would be difficult to do with the Tufts wireless network, and in general, we want our Pi protected by the Tufts firewall.
-
-Install Certbot and Gandi DNS plugin: `/home/pi/oprint/bin/pip3 install certbot-plugin-gandi`
 
 Run the `certbot` command below. It will fail, but it will create the `/etc/letsencrypt` directory with a bunch of config files inside the first time it runs.
 
