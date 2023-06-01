@@ -91,20 +91,13 @@ Install Certbot and Gandi DNS plugin: `/home/pi/oprint/bin/pip3 install certbot-
 
 Run the `certbot` command below. It will fail, but it will create the `/etc/letsencrypt` directory with a bunch of config files inside the first time it runs.
 
-`sudo /home/pi/oprint/bin/certbot certonly -a certbot-plugin-gandi:dns --certbot-plugin-gandi:dns-credentials /etc/letsencrypt/gandi.ini -d p9.nolop.org`
-
-NOTE:
-
-```
-Plugin legacy name certbot-plugin-gandi:dns may be removed in a future version. Please use dns instead.
-Certbot is moving to remove 3rd party plugins prefixes. Please use --authenticator dns-gandi --dns-gandi-credentials
-```
+`sudo /home/pi/oprint/bin/certbot certonly --authenticator dns-gandi --dns-gandi-credentials /etc/letsencrypt/gandi.ini -d p1.nolop.org`
 
 Get Gandi LiveDNS API key from another printer or Gandi.net.
 
 Create `/etc/letsencrypt/gandi.ini` config file with the following contents and `chmod 600 gandi.ini` on it:
 
-    certbot_plugin_gandi:dns_api_key=THE_API_KEY_GOES_HERE_BUT_IT_IS_SECRET
+    dns_gandi_api_key=THE_API_KEY_GOES_HERE_BUT_IT_IS_SECRET
 
 Run the certbot command again; this time it should work.
 
