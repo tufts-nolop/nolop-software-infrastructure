@@ -1,10 +1,24 @@
 ---
 - hosts: p1
   remote_user: pi
+  #vars_prompt:
+  #  - name: ddns_api_key
+  #    prompt: Enter the DNS API key
   vars_prompt:
-    - name: ddns_api_key
-      prompt: Enter the DNS API key
+    - name: admin_pw
+      prompt: Enter the Octoprint admin password
   tasks:
+    - name: Add user nolop
+      shell: /home/pi/oprint/bin/octoprint user add --password 3dprint --group users nolop
+    - name: Add user admin
+      shell: /home/pi/oprint/bin/octoprint user add --password {{ admin_pw|quote }} --admin admin
+
+    - name: Restart Octoprint
+      become: yes
+      ansible.builtin.service:
+        name: octoprint
+        state: restarted
+
     - name: Open YAML config file
       slurp:
         path: /home/pi/.octoprint/config.yaml
