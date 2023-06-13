@@ -27,25 +27,25 @@ Edit `/boot/octopi-wpa-supplicant.txt` so that it has the correct wifi password 
 
 Add the line `enable_uart=1` at the bottom of `/config.txt` on the boot partition.
 
-### Octoprint configuration
+### Octoprint configuration using Ansible
 
-To be able to run Ansible, copy your host key to all the printers.
+Install Ansible on your laptop: https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
+
+Download this Git repository to your laptop so that you have the Nolop printer Ansible playbook and all the custom files that will be copied to the printers.
+
+To allow Ansible to log in to all the printers remotely via SSH, you'll need to generate SSH encryption keys: `ssh-keygen`
+
+Copy your SSH host key to all the printers (this is sort of tedious, but you only have to do it once).
 
 `ssh-copy-id pi@p1.nolop.org`
 
-Set up users like this:
+Then, you can run the printer playbook like this: `ansible-playbook -i ansible-inventory.ini -K printer-tasks.yaml`
 
-```
-source ~/oprint/bin/activate
-octoprint user add nolop
-service octoprint restart
-```
+## Some tasks not yet automated by Ansible
 
-Edit `~/.octoprint/users.yaml` so that the user `nolop` has the correct API key so our Nolop printer dashboard will work. Also change the admin account so that it is actually an admin.
+Edit `~/.octoprint/users.yaml` so that the user `nolop` has the correct API key so our Nolop printer dashboard will work.
 
 Tell Brandon the IP address of the printer and get him to set up pX.nolop.org to point to that IP.
-
-Accept the default printer profile because we'll change that later.
 
 Copy over the contents of the profile from https://github.com/tufts-nolop/nolop-software-infrastructure/blob/master/printerProfiles/nolop_prusa_mk3_1.profile as below.
 
@@ -55,7 +55,7 @@ cd ~/.octoprint/printerProfiles
 wget https://raw.githubusercontent.com/tufts-nolop/nolop-software-infrastructure/master/printerProfiles/nolop_prusa_mk3_1.profile
 ```
 
-Settings for firmware update plugin:
+Settings for firmware update plugin (not sure Ansible is setting these right, but maybe?):
 
 * Atmel 8-bit processor
 * ATMEGA 2450
@@ -64,7 +64,7 @@ Settings for firmware update plugin:
 
 ### Cura Slicer setup
 
-Build Cura Legacy
+Build Cura Legacy (this needs to be added to Ansible somehow).
 
 ```
 git clone -b legacy https://github.com/Ultimaker/CuraEngine.git
@@ -76,6 +76,8 @@ sudo cp ./CuraEngine /usr/local/bin/cura_engine
 
 ## Set up SSL ##
 
+(Ansible almost does this correctly, except that there's some encryption module used by Certbot that needs the Rust compiler and cargo, the Rust package manager. The installation of all that stuff needs to be automated.)
+
 To get a valid SSL certificate, we're going to use Let's Encrypt's Certbot client with its DNS challenge because it can be done automatically with at least some registrars, including ours, Gandi.net. We want to use the DNS challenge because the alternative, the HTTP challenge, requires that your Pi be reachable on the open internet, which would be difficult to do with the Tufts wireless network, and in general, we want our Pi protected by the Tufts firewall.
 
 Run the `certbot` command below. It will fail, but it will create the `/etc/letsencrypt` directory with a bunch of config files inside the first time it runs.
@@ -85,6 +87,8 @@ Run the `certbot` command below. It will fail, but it will create the `/etc/lets
 Get Gandi LiveDNS API key from another printer or Gandi.net.
 
 Run the certbot command again; this time it should work.
+
+## Other useful stuff for printer maintenance
 
 ### Changing hostnames ###
 
