@@ -37,6 +37,14 @@
           plugins:
             curalegacy:
               cura_engine: /usr/local/bin/cura_engine
+            firmwareupdater:
+              profiles:
+              - _id: 0
+                _name: Default
+                avrdude_avrmcu: m2560
+                avrdude_path: /usr/bin/avrdude
+                avrdude_programmer: wiring
+                flash_method: avrdude
             tracking:
               enabled: true
           serial:
@@ -49,6 +57,8 @@
               enabled: true
             pluginBlacklist:
               enabled: true
+            ipCheck:
+              enabled: false
     - name: Write dict to new YAML file
       copy:
         content: "{{ config_dict | to_nice_yaml }}"
