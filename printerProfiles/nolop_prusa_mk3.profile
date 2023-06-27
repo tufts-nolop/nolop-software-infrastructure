@@ -21,9 +21,9 @@ extruder:
   sharedNozzle: false
 heatedBed: true
 heatedChamber: false
-id: nolop_prusa_mk3_1
-model: nolop_prusa_mk3_1
-name: Nolop Prusa MK3 1
+id: nolop_prusa_mk3
+model: nolop_prusa_mk3
+name: Nolop Prusa MK3
 volume:
   custom_box:
     x_max: 250.0
