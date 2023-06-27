@@ -54,6 +54,14 @@
         content: "{{ config_dict | to_nice_yaml }}"
         dest: /home/pi/.octoprint/config.yaml
 
+    - name: Add printer profile for Prusa MK3S+
+      ansible.builtin.copy:
+        src: ./printerProfiles/nolop_prusa_mk3.profile
+        dest: /home/pi/.octoprint/printerProfiles/nolop_prusa_mk3.profile
+        owner: pi
+        group: pi
+        mode: '0744'
+
     - name: Add slicing profile for PLA
       ansible.builtin.copy:
         src: ./slicingProfiles/curalegacy/nolop_prusa_pla.profile
