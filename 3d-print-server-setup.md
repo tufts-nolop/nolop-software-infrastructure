@@ -47,21 +47,6 @@ Edit `~/.octoprint/users.yaml` so that the user `nolop` has the correct API key 
 
 Tell Brandon the IP address of the printer and get him to set up pX.nolop.org to point to that IP.
 
-Copy over the contents of the profile from https://github.com/tufts-nolop/nolop-software-infrastructure/blob/master/printerProfiles/nolop_prusa_mk3_1.profile as below.
-
-```
-rm ~/.octoprint/printerProfiles/_default.profile
-cd ~/.octoprint/printerProfiles
-wget https://raw.githubusercontent.com/tufts-nolop/nolop-software-infrastructure/master/printerProfiles/nolop_prusa_mk3_1.profile
-```
-
-Settings for firmware update plugin (not sure Ansible is setting these right, but maybe?):
-
-* Atmel 8-bit processor
-* ATMEGA 2450
-* /usr/bin/avrdude
-* wiring
-
 ### Cura Slicer setup
 
 Build Cura Legacy (this needs to be added to Ansible somehow).
