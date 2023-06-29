@@ -21,13 +21,15 @@ In the imager, pick OctoPi for installation: `Choose OS > Other specific-purpose
 
 In the imager, click the gear icon to set the hostname to pX, enable SSH, and set the password for user `pi`.
 
-Copy `octopi-wpa-supplicant.txt` to `/boot/octopi-wpa-supplicant.txt` on the boot partition.
+Copy `octopi-wpa-supplicant.txt` to the boot partition of the SD card.
 
-Edit `/boot/octopi-wpa-supplicant.txt` so that it has the correct wifi password (which we can't store on the internet) from the Nolop whiteboard.
+Edit `octopi-wpa-supplicant.txt` so that it has the correct wifi password (which we can't store on the internet) from the Nolop whiteboard.
 
 Add the line `enable_uart=1` at the bottom of `/config.txt` on the boot partition.
 
 ### Octoprint configuration using Ansible
+
+Install Pip on your laptop. On Windows, this means installing Windows Subsystem for Linux with the command `wsl --install`. On MacOS, either install XCode (which is a a big collection of software tools that you won't use) or (better plan) download the Python installer, install Python, run the `Update Shell Profile.command` script, and then run `python3 -m ensurepip --upgrade`
 
 Install Ansible on your laptop: https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
 
@@ -46,21 +48,6 @@ Then, you can run the printer playbook like this: `ansible-playbook -i ansible-i
 Edit `~/.octoprint/users.yaml` so that the user `nolop` has the correct API key so our Nolop printer dashboard will work.
 
 Tell Brandon the IP address of the printer and get him to set up pX.nolop.org to point to that IP.
-
-Copy over the contents of the profile from https://github.com/tufts-nolop/nolop-software-infrastructure/blob/master/printerProfiles/nolop_prusa_mk3_1.profile as below.
-
-```
-rm ~/.octoprint/printerProfiles/_default.profile
-cd ~/.octoprint/printerProfiles
-wget https://raw.githubusercontent.com/tufts-nolop/nolop-software-infrastructure/master/printerProfiles/nolop_prusa_mk3_1.profile
-```
-
-Settings for firmware update plugin (not sure Ansible is setting these right, but maybe?):
-
-* Atmel 8-bit processor
-* ATMEGA 2450
-* /usr/bin/avrdude
-* wiring
 
 ### Cura Slicer setup
 
