@@ -49,17 +49,7 @@ Edit `~/.octoprint/users.yaml` so that the user `nolop` has the correct API key 
 
 Tell Brandon the IP address of the printer and get him to set up pX.nolop.org to point to that IP.
 
-### Cura Slicer setup
-
-Build Cura Legacy (this needs to be added to Ansible somehow).
-
-```
-git clone -b legacy https://github.com/Ultimaker/CuraEngine.git
-cd CuraEngine
-make
-cd build
-sudo cp ./CuraEngine /usr/local/bin/cura_engine
-```
+Installing `rustc` and `cargo` properly.
 
 ## Set up SSL ##
 
