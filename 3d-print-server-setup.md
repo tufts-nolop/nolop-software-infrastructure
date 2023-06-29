@@ -29,6 +29,8 @@ Add the line `enable_uart=1` at the bottom of `/config.txt` on the boot partitio
 
 ### Octoprint configuration using Ansible
 
+Install Pip on your laptop. On Windows, this means installing Windows Subsystem for Linux with the command `wsl --install`. On MacOS, either install XCode (which is a a big collection of software tools that you won't use) or (better plan) download the Python installer, install Python, run the `Update Shell Profile.command` script, and then run `python3 -m ensurepip --upgrade`
+
 Install Ansible on your laptop: https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
 
 Download this Git repository to your laptop so that you have the Nolop printer Ansible playbook and all the custom files that will be copied to the printers.
