@@ -1,5 +1,5 @@
 ---
-- hosts: p1
+- hosts: p3
   remote_user: pi
   #vars_prompt:
   #  - name: ddns_api_key
@@ -47,6 +47,8 @@
                 flash_method: avrdude
             tracking:
               enabled: true
+          printerProfiles:
+            default: nolop_prusa_mk3
           serial:
             autoconnect: true
             baudrate: 115200
@@ -72,20 +74,21 @@
         group: pi
         mode: '0744'
 
-    - name: Add slicing profile for PLA
-      ansible.builtin.copy:
-        src: ./slicingProfiles/curalegacy/nolop_prusa_pla.profile
-        dest: /home/pi/.octoprint/slicingProfiles/curalegacy/nolop_prusa_pla.profile
-        owner: pi
-        group: pi
-        mode: '0744'
-    - name: Add slicing profile for TPU
-      ansible.builtin.copy:
-        src: ./slicingProfiles/curalegacy/nolop_prusa_tpu.profile
-        dest: /home/pi/.octoprint/slicingProfiles/curalegacy/nolop_prusa_tpu.profile
-        owner: pi
-        group: pi
-        mode: '0744'
+    - name: Clone Cura slicer from Github
+      ansible.builtin.git:
+        repo: https://github.com/Ultimaker/CuraEngine.git
+        dest: /home/pi/cura
+        single_branch: yes
+        version: legacy
+
+    - name: Build Cura
+      command: make
+      args:
+        chdir: /home/pi/cura
+
+    - name: Install Cura executable
+      become: yes
+      command: cp /home/pi/cura/build/CuraEngine /usr/local/bin/cura_engine
 
 # install rust with rustup, then
 # sudo ln -s /home/pi/.cargo/bin/rustc /usr/local/bin/rustc
@@ -107,6 +110,27 @@
           - https://github.com/kennethjiang/OctoPrint-Slicer/archive/refs/tags/2.0.0.zip
           - https://github.com/OctoPrint/OctoPrint-FirmwareUpdater/archive/refs/tags/1.14.0.zip
           - certbot-plugin-gandi
+
+    - name: Create directory for slicing profiles
+      file: 
+        path: /home/pi/.octoprint/slicingProfiles/curalegacy
+        state: directory
+
+    - name: Add slicing profile for PLA
+      ansible.builtin.copy:
+        src: ./slicingProfiles/curalegacy/nolop_prusa_pla.profile
+        dest: /home/pi/.octoprint/slicingProfiles/curalegacy/nolop_prusa_pla.profile
+        owner: pi
+        group: pi
+        mode: '0744'
+
+    - name: Add slicing profile for TPU
+      ansible.builtin.copy:
+        src: ./slicingProfiles/curalegacy/nolop_prusa_tpu.profile
+        dest: /home/pi/.octoprint/slicingProfiles/curalegacy/nolop_prusa_tpu.profile
+        owner: pi
+        group: pi
+        mode: '0744'
 
     - name: Check Octoprint and plugins version
       shell: /home/pi/oprint/bin/octoprint plugins softwareupdate:check && cat /etc/octopi_version
