@@ -61,6 +61,9 @@
               enabled: true
             ipCheck:
               enabled: false
+          slicing:
+            defaultProfiles:
+              curalegacy: nolop_prusa_pla
     - name: Write dict to new YAML file
       copy:
         content: "{{ config_dict | to_nice_yaml }}"
