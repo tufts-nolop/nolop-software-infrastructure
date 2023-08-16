@@ -97,6 +97,24 @@
 # sudo ln -s /home/pi/.cargo/bin/rustc /usr/local/bin/rustc
 # sudo ln -s /home/pi/.cargo/bin/cargo /usr/local/bin/cargo
 
+    - name: download rustup
+      get_url:
+        url: https://sh.rustup.rs
+        dest: /tmp/sh.rustup.rs
+        mode: '0755'
+        force: 'yes'
+      
+    - name: install rust/cargo
+      shell: /tmp/sh.rustup.rs -y
+
+    - name: symlink rustc
+      become: yes
+      shell: ln -s /home/pi/.cargo/bin/rustc /usr/local/bin/rustc
+
+    - name: symlink cargo
+      become: yes
+      shell: ln -s /home/pi/.cargo/bin/cargo /usr/local/bin/cargo
+
     - name: Install avrdude
       become: yes
       apt:
