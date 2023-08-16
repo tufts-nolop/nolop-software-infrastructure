@@ -1,10 +1,9 @@
 ---
-- hosts: p3
+- hosts: p6
   remote_user: pi
-  #vars_prompt:
-  #  - name: ddns_api_key
-  #    prompt: Enter the DNS API key
   vars_prompt:
+#    - name: ddns_api_key
+#      prompt: Enter the DNS API key
     - name: admin_pw
       prompt: Enter the Octoprint admin password
   tasks:
@@ -109,11 +108,21 @@
 
     - name: symlink rustc
       become: yes
-      shell: ln -s /home/pi/.cargo/bin/rustc /usr/local/bin/rustc
+      ansible.builtin.file:
+        src: /home/pi/.cargo/bin/rustc
+        dest: /usr/local/bin/rustc
+        owner: root
+        group: root
+        state: link
 
     - name: symlink cargo
       become: yes
-      shell: ln -s /home/pi/.cargo/bin/cargo /usr/local/bin/cargo
+      ansible.builtin.file:
+        src: /home/pi/.cargo/bin/cargo
+        dest: /usr/local/bin/cargo
+        owner: root
+        group: root
+        state: link
 
     - name: Install avrdude
       become: yes
