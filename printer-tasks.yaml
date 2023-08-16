@@ -1,5 +1,5 @@
 ---
-- hosts: p6
+- hosts: p8
   remote_user: pi
   vars_prompt:
 #    - name: ddns_api_key
@@ -225,7 +225,7 @@
         state: started
     - name: Add SSL cert post-renewal script for Haproxy
       become: yes
-      ansible.builtin.copy:
+      ansible.builtin.template:
         src: ./install-ssl-cert-for-haproxy.sh # BUG: need to add a hostname variable to this file
         dest: /etc/letsencrypt/renewal-hooks/post/install-ssl-cert-for-haproxy.sh
         owner: root
