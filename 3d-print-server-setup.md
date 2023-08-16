@@ -21,6 +21,10 @@ In the imager, pick OctoPi for installation: `Choose OS > Other specific-purpose
 
 In the imager, click the gear icon to set the hostname to pX, enable SSH, and set the password for user `pi`.
 
+In the imager, choose the SD card as the destination and write the image to the card.
+
+After the card image is written and verified, remove and reinsert the card.
+
 Copy `octopi-wpa-supplicant.txt` to the boot partition of the SD card.
 
 Edit `octopi-wpa-supplicant.txt` so that it has the correct wifi password (which we can't store on the internet) from the Nolop whiteboard.
@@ -49,7 +53,7 @@ Edit `~/.octoprint/users.yaml` so that the user `nolop` has the correct API key 
 
 Tell Brandon the IP address of the printer and get him to set up pX.nolop.org to point to that IP.
 
-Installing `rustc` and `cargo` properly.
+Installing `rustc` and `cargo` properly. (Might be fixed?)
 
 ## Set up SSL ##
 
