@@ -93,10 +93,6 @@
       become: yes
       command: cp /home/pi/cura/build/CuraEngine /usr/local/bin/cura_engine
 
-# install rust with rustup, then
-# sudo ln -s /home/pi/.cargo/bin/rustc /usr/local/bin/rustc
-# sudo ln -s /home/pi/.cargo/bin/cargo /usr/local/bin/cargo
-
     - name: download rustup
       get_url:
         url: https://sh.rustup.rs
