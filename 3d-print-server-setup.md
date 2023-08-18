@@ -53,21 +53,15 @@ Edit `~/.octoprint/users.yaml` so that the user `nolop` has the correct API key 
 
 Tell Brandon the IP address of the printer and get him to set up pX.nolop.org to point to that IP.
 
-Installing `rustc` and `cargo` properly. (Might be fixed?)
-
 ## Set up SSL ##
-
-(Ansible almost does this correctly, except that there's some encryption module used by Certbot that needs the Rust compiler and cargo, the Rust package manager. The installation of all that stuff needs to be automated.)
 
 To get a valid SSL certificate, we're going to use Let's Encrypt's Certbot client with its DNS challenge because it can be done automatically with at least some registrars, including ours, Gandi.net. We want to use the DNS challenge because the alternative, the HTTP challenge, requires that your Pi be reachable on the open internet, which would be difficult to do with the Tufts wireless network, and in general, we want our Pi protected by the Tufts firewall.
 
-Run the `certbot` command below. It will fail, but it will create the `/etc/letsencrypt` directory with a bunch of config files inside the first time it runs.
+Run `sudo /home/pi/oprint/bin/certbot certonly --authenticator dns-gandi --dns-gandi-credentials /etc/letsencrypt/gandi.ini -d p1.nolop.org`
 
-`sudo /home/pi/oprint/bin/certbot certonly --authenticator dns-gandi --dns-gandi-credentials /etc/letsencrypt/gandi.ini -d p1.nolop.org`
+If the Gandi LiveDNS API key is not installed, get it from another printer or Gandi.net.
 
-Get Gandi LiveDNS API key from another printer or Gandi.net.
-
-Run the certbot command again; this time it should work.
+Execute `/etc/letsencrypt/renewal-hooks/post/install-ssl-cert-for-haproxy.sh` to install the certificate.
 
 ## Other useful stuff for printer maintenance
 
