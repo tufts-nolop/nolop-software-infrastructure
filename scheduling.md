@@ -34,3 +34,7 @@ link.download = "when2meet.csv";
 link.click();
 URL.revokeObjectURL(link.href);
 ```
+
+This will create and download a CSV file with an availability column for each staff member.
+
+Then just quickly write and execute some code that will assign shifts based on this data.
