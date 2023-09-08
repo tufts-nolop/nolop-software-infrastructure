@@ -2,7 +2,7 @@ First, have the staff enter their availability in a when2meet.
 
 Then, run this code in the JS console after loading the when2meet.
 
-```
+```js
 // from https://gist.github.com/camtheman256/3125e18ba20e90b6252678714e5102fd?permalink_comment_id=4678586#gistcomment-4678586
 function getCSV() {
   result = "Time," + PeopleNames.join(",")+"\n"; 
