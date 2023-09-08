@@ -50,6 +50,8 @@ For each shift, pick a staff member at random. If they are available and have be
 
 Add 15 minutes to the staff member's total time.
 
+It would be nice to be able to display the SVG shifts as they are populated, so we can see how the process works for debugging.
+
 ### Making the SVG image
 
 Assign each staff member a fill color from the Tango color palette (at least 26 colors available if you use a few grays).
