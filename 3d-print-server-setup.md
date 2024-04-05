@@ -17,7 +17,11 @@ The bracket mounts to the Prusa with two M3 bolts.
 
 Install the Raspberry Pi Imager.
 
-In the imager, pick OctoPi for installation: `Choose OS > Other specific-purpose OS > 3D printing > OctoPi (stable)`
+Edit for the Pi 5: download `2024-04-03_2024-03-15-octopi-bookworm-armhf-lite-1.1.0.zip` from https://unofficialpi.org/Distros/OctoPi/nightly/?C=M;O=D
+
+Use the imager to install the zip file you just downloaded.
+
+<!---In the imager, pick OctoPi for installation: `Choose OS > Other specific-purpose OS > 3D printing > OctoPi (stable)`--->
 
 In the imager, click the gear icon to set the hostname to pX, enable SSH, and set the password for user `pi`.
 
