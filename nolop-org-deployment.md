@@ -60,6 +60,8 @@ https://raw.githubusercontent.com/tufts-nolop/nolop-software-infrastructure/mast
     total 0
     lrwxrwxrwx 1 root root 47 Oct 30 14:50 default -> /etc/nginx/sites-available/nginx-wordpress.conf
 
+Redirect `nolop.org` DNS record to point to new Linode IP. Need this for SSL certificate to issue.
+
 Set up SSL certificates
 
     snap install core
