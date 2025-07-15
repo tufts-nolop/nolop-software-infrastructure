@@ -48,7 +48,7 @@ Create database for Wordpress.
 Configure PHP-FPM and PHP-MySQL
 
     systemctl restart nginx
-    systemctl restart php7.4-fpm
+    systemctl restart php8.3-fpm
 
 Create file `nginx-wordpress.conf` in `/etc/nginx/sites-available` containing
 https://raw.githubusercontent.com/tufts-nolop/nolop-software-infrastructure/master/nginx-wordpress.conf
