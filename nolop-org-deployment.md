@@ -88,4 +88,6 @@ Upload Updraft Wordpress backups from the old site.
 
 Install backups.
 
+Under Settings, change Wordpress Address (URL) and Site Address (URL) to `https://nolop.org`
+
 Lie down and die like a proud man.
