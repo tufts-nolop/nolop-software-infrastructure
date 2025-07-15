@@ -78,7 +78,13 @@ Add to server block in `nginx-wordpress.conf`:
 
 Restart Nginx.
 
-Log in to Wordpress and copy over Wordpress backups.
+Log in to Wordpress.
+
+Disable comments under Settings > Discussion.
+
+Install the Updraft plugin.
+
+Upload Updraft Wordpress backups from the old site.
 
 Install backups.
 
